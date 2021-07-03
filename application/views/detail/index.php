@@ -21,7 +21,7 @@
             <form action="" method="POST">
                 <div class="input-group flex-nowrap">
                     <input type="hidden" value="<?= $user['id'] ?>" name="user">
-                    <input type="hidden" value="<?= $user['id'] ?>" name="kegiatan">
+                    <input type="hidden" value="<?= $kegiatan['id'] ?>" name="kegiatan">
                     <span class="input-group-text" id="addon-wrapping"><?= $user['nama'] ?></span>
                     <input type="text" class="form-control" name="komentar" aria-describedby="addon-wrapping" value="<?=set_value('komentar')?>">
                     <button class="btn btn-success justify-content-end" <?php if($kegiatan['status']==1){ echo "disabled";}?>>Submit</button>
