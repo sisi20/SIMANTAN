@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2021 at 05:46 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Waktu pembuatan: 04 Jul 2021 pada 11.58
+-- Versi server: 10.4.19-MariaDB
+-- Versi PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,13 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kegiatan`
+-- Struktur dari tabel `kegiatan`
 --
 
 CREATE TABLE `kegiatan` (
   `id` int(11) NOT NULL,
   `kegiatan` varchar(100) NOT NULL,
+  `kegiatan_unit` varchar(100) NOT NULL,
+  `kegiatan_peserta` varchar(100) NOT NULL,
+  `kegiatan_jmlpeserta` varchar(100) NOT NULL,
   `prioritas` varchar(50) NOT NULL,
+  `prioritas_alasan` varchar(100) NOT NULL,
   `penanggung_jawab` int(11) NOT NULL,
   `waktu` datetime NOT NULL,
   `lokasi` varchar(50) NOT NULL,
@@ -40,17 +44,18 @@ CREATE TABLE `kegiatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kegiatan`
+-- Dumping data untuk tabel `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id`, `kegiatan`, `prioritas`, `penanggung_jawab`, `waktu`, `lokasi`, `pelaksana`, `skema`, `status`) VALUES
-(1, 'Test Kegiatan', 'Tinggi', 2, '2021-07-02 20:09:13', 'Pekan baru', 'HIMA', 'Test Kegiatan untuk buat komentar', 1),
-(2, 'Test Kegiatan ke2', 'Tinggi', 1, '2021-07-03 06:57:41', 'Pekan baru', 'HIMA', 'Test Skema yang ke 2', 0);
+INSERT INTO `kegiatan` (`id`, `kegiatan`, `kegiatan_unit`, `kegiatan_peserta`, `kegiatan_jmlpeserta`, `prioritas`, `prioritas_alasan`, `penanggung_jawab`, `waktu`, `lokasi`, `pelaksana`, `skema`, `status`) VALUES
+(1, 'Test Kegiatan', '', '', '', 'Tinggi', '', 2, '2021-07-02 20:09:13', 'Pekan baru', 'HIMA', 'Test Kegiatan untuk buat komentar', 1),
+(2, 'Test Kegiatan ke2', '', '', '', 'Tinggi', '', 1, '2021-07-03 06:57:41', 'Pekan baru', 'HIMA', 'Test Skema yang ke 2', 0),
+(3, '2', '2', '2', '2', 'Biasa', '2', 1, '2021-07-08 18:26:00', 'R.118', '2', '2', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komentar`
+-- Struktur dari tabel `komentar`
 --
 
 CREATE TABLE `komentar` (
@@ -62,7 +67,7 @@ CREATE TABLE `komentar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `komentar`
+-- Dumping data untuk tabel `komentar`
 --
 
 INSERT INTO `komentar` (`id`, `user`, `kegiatan`, `komentar`, `tanggal`) VALUES
@@ -73,12 +78,13 @@ INSERT INTO `komentar` (`id`, `user`, `kegiatan`, `komentar`, `tanggal`) VALUES
 (11, 2, 2, 'test', '2021-07-03 12:24:36'),
 (12, 2, 2, 'test disa', '2021-07-03 12:25:19'),
 (13, 2, 2, 'test disable', '2021-07-03 12:26:13'),
-(14, 2, 1, 'test disabled1', '2021-07-03 12:27:53');
+(14, 2, 1, 'test disabled1', '2021-07-03 12:27:53'),
+(15, 2, 2, 'fddf', '2021-07-04 04:56:05');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Struktur dari tabel `role`
 --
 
 CREATE TABLE `role` (
@@ -87,7 +93,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `role`
+-- Dumping data untuk tabel `role`
 --
 
 INSERT INTO `role` (`id`, `role`) VALUES
@@ -97,7 +103,7 @@ INSERT INTO `role` (`id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -107,7 +113,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `nama`, `role`) VALUES
@@ -119,14 +125,14 @@ INSERT INTO `user` (`id`, `nama`, `role`) VALUES
 --
 
 --
--- Indexes for table `kegiatan`
+-- Indeks untuk tabel `kegiatan`
 --
 ALTER TABLE `kegiatan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_kegiatan_user` (`penanggung_jawab`);
 
 --
--- Indexes for table `komentar`
+-- Indeks untuk tabel `komentar`
 --
 ALTER TABLE `komentar`
   ADD PRIMARY KEY (`id`),
@@ -134,59 +140,59 @@ ALTER TABLE `komentar`
   ADD KEY `fk_komentar_user` (`user`);
 
 --
--- Indexes for table `role`
+-- Indeks untuk tabel `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user_role` (`role`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `kegiatan`
+-- AUTO_INCREMENT untuk tabel `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `komentar`
+-- AUTO_INCREMENT untuk tabel `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `kegiatan`
+-- Ketidakleluasaan untuk tabel `kegiatan`
 --
 ALTER TABLE `kegiatan`
   ADD CONSTRAINT `fk_kegiatan_user` FOREIGN KEY (`penanggung_jawab`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `komentar`
+-- Ketidakleluasaan untuk tabel `komentar`
 --
 ALTER TABLE `komentar`
   ADD CONSTRAINT `fk_komentar_kegiatan` FOREIGN KEY (`kegiatan`) REFERENCES `kegiatan` (`id`),
   ADD CONSTRAINT `fk_komentar_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `user`
+-- Ketidakleluasaan untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`);
