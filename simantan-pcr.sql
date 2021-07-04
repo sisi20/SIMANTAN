@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jul 2021 pada 11.58
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 8.0.6
+-- Waktu pembuatan: 04 Jul 2021 pada 20.18
+-- Versi server: 10.4.18-MariaDB
+-- Versi PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -109,16 +109,18 @@ INSERT INTO `role` (`id`, `role`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `role`) VALUES
-(1, 'SatgasCovid19', 1),
-(2, 'Test', 2);
+INSERT INTO `user` (`id`, `nama`, `role`, `password`, `username`) VALUES
+(1, 'SatgasCovid19', 1, '12345', 'user1'),
+(2, 'Test', 2, '123456', 'user2');
 
 --
 -- Indexes for dumped tables
