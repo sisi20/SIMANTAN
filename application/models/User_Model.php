@@ -1,3 +1,4 @@
+  
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -37,4 +38,10 @@ class User_Model extends CI_Model
     {
         $this->db->delete($this->tabel, array('id' => $id));
     }
+
+    public function login($username, $password){
+        return $this->db->query("select * from user
+        Where username='".$username."' AND password='".$password."'")->row();
+    }
+
 }

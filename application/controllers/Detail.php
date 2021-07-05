@@ -35,7 +35,7 @@ class Detail extends CI_Controller
 
 	public function komentar($kegiatan = '1')
 	{
-		$data['user'] = $this->User_Model->get_by_id('2'); //ambil dari session
+		$data['user'] = $this->User_Model->get_by_id('1'); //ambil dari session
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required', [
@@ -47,8 +47,7 @@ class Detail extends CI_Controller
 			$this->load->view('layout/footer');
 		} else {
 			if ($data['kegiatan']['status'] == 1) {
-				echo "<script> alert('mau nge hack yaaa'); document.location.href = '".base_url()."';</script>";
-
+				echo "<script> alert('mau nge hack yaaa'); document.location.href = '" . base_url() . "';</script>";
 			} else {
 				$input = [
 					'user' => $this->input->post('user'),
@@ -68,5 +67,13 @@ class Detail extends CI_Controller
 	{
 		$this->Kegiatan_Model->gantiStatus($id);
 		redirect('kegiatan/');
+	}
+
+	public function LihatDetail($id)
+	{
+		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($id);
+		$this->load->view('layout/header');
+		$this->load->view('detail/detail', $data);
+		$this->load->view('layout/footer');
 	}
 }
