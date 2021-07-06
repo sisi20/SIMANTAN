@@ -108,4 +108,10 @@ class Kegiatan extends CI_Controller
 			// print_r($data); die;
 		}
 	}
+	public function cetak()
+	{
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML('<h1>lalala</h1>');
+		$mpdf->Output();
+	}
 }
