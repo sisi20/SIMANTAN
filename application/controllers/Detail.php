@@ -88,9 +88,127 @@ class Detail extends CI_Controller
 
 	public function LihatDetail($id)
 	{
+		$data['user'] = $this->session->userdata('user');
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($id);
+
 		$this->load->view('layout/header');
 		$this->load->view('detail/detail', $data);
 		$this->load->view('layout/footer');
+	}
+	public function cetak($id)
+	{
+		// $this->load->model('User_Model');
+		// $this->load->model('Kegiatan_Model');
+		// $this->load->model('Komentar_Model');
+		$data['komentar'] = $this->Komentar_Model->get_by_id($id);
+		$data['user'] = $this->session->userdata('user');
+		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($id);
+		// $data['komentar'] = $this->Komentar_model->get_by_id();
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML('<style>
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 5px;
+			text-align: left;
+		}
+		table {
+			width: 100%;
+		}
+		td {
+			height: 100px;
+			padding: 10px;
+		}
+		td {
+			width: 30%;
+		}
+	</style>');
+		$mpdf->WriteHTML('<h2 style="text-align: center;">SURAT REKOMENDASI SATGAS COVID PCR UNTUK KEGIATAN TERENCANA</h2>');
+		$mpdf->WriteHTML('<table border="1px solid black" aria-colspan="2">');
+		$mpdf->WriteHTML('<tr>
+		<td><b>KEGIATAN</b></td>
+		<td colspan="3"> 
+		<p><b>Nama Kegiatan</b></p>
+		<p>' . $data['kegiatan']['kegiatan'] . '</p>
+		<p><b>Unit Yang Mengajukan Kegiatan</b></p>
+		<p>' . $data['kegiatan']['kegiatan_unit'] . '</p>
+		<p><b>Peserta Kegiatan Darimana</b></p>
+		<p>' . $data['kegiatan']['kegiatan_peserta'] . '</p>
+		<p><b>Jumlah Peserta Yang Mengikuti Kegiatan</b></p>
+		<p>' . $data['kegiatan']['kegiatan_jmlpeserta'] . '</p>
+		</td>
+		
+	</tr>');
+
+		$mpdf->WriteHTML('<tr >
+		<td><b>PRIORITAS</b></td>
+		<td colspan="3">
+		<p><b>Tingkat Prioritas</b></p>
+		<p>' . $data['kegiatan']['prioritas'] . '</p>
+		<p><b>Alasan Prioritas</b></p>
+		<p>' . $data['kegiatan']['prioritas_alasan'] . '</p>
+		</td>
+	</tr>');
+		$mpdf->WriteHTML('<tr >
+		<td><b>PENANGGUNG JAWAB</b></td>
+		<td colspan="3">' . $data['kegiatan']['user'] . '</td>
+	</tr>');
+	
+		$timestamp = strtotime($data['kegiatan']['waktu']);
+		$day = date('l', $timestamp);;
+		if($day == 'Monday'){
+			$day = 'Senin';
+		}else if($day == 'Tuesday'){
+			$day = 'Selasa';
+		}else if($day == 'Wednesday'){
+			$day = 'Rabu';
+		}else if($day == 'Thursday'){
+			$day = 'Kamis';
+		}else if($day == 'Friday'){
+			$day = 'Jumat';
+		}else if($day == 'Saturday'){
+			$day = 'Sabtu';
+		}else if($day == 'Sunday'){
+			$day = 'Minggu';
+		}
+		$mpdf->WriteHTML('<tr >
+		<td><b>WAKTU / TEMPAT / LOKASI</b></td>
+		<td colspan="3">
+		<p><b>Waktu</b></p>
+		<p>' .$day.' , '. $data['kegiatan']['waktu'] . '</p>
+		<p><b>Lokasi / Tempat</b></p>
+		<p>' . $data['kegiatan']['tempat'] . '</p>
+		<p>' . $data['kegiatan']['lokasi'] . '</p>
+		</td>
+	</tr>');
+		$mpdf->WriteHTML('<tr >
+		<td><b>SKEMA KEGIATAN TERHADAP PROKES</b></td>
+		<td colspan="3">
+		<p><b>Proses Peserta Masuk Dan Keluar Kampus</b></p>
+		<p>' . $data['kegiatan']['skema_proses_masuk_keluar'] . '</p>
+		<p><b>Penerapan Proses Ke Peserta</b></p>
+		<p>' . $data['kegiatan']['skema_penerapan_prokes'] . '</p>
+		<p><b>Skema Selama Kegiatan Berlangsung</b></p>
+		<p>' . $data['kegiatan']['skema_kegiatan_berlangsung'] . '</p>
+		<p><b>Skema Setelah Kegiatan Selesai</b></p>
+		<p>' . $data['kegiatan']['skema_kegiatan_selesai'] . '</p>
+		</td>
+	</tr>');
+		$mpdf->WriteHTML('<tr colspan="4">
+		<td colspan="1"><b>CATATAN SATGAS</b></td>
+		<td colspan="3">');
+		foreach($data['komentar'] as $k) : 
+			$mpdf->WriteHTML('<p><b>'.$k['user'].'</b> : '.$k['komentar'].'</p>'); 
+		endforeach; 
+		$mpdf->WriteHTML('
+		</td>
+		</tr>');
+		$mpdf->WriteHTML('<tr colspan="4">
+		<td><b>Tanda Tangan</b></td>
+		<td colspan="1"><p><b>PENGUSUL</b></p> <br>' .  $data['kegiatan']['pengaju'] . '</td>
+		<td colspan="2"><p><b>PENGGAPROVE</b></p> <br>SATGAS COVID</td>
+	</tr>');
+		$mpdf->WriteHTML('</table>');
+		$mpdf->Output();
 	}
 }
