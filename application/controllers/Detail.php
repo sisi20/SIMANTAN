@@ -35,14 +35,25 @@ class Detail extends CI_Controller
 
 	public function komentar($kegiatan = '1')
 	{
-		$data['user'] = $this->User_Model->get_by_id('1'); //ambil dari session
+		$data['user'] = $this->User_Model->get_by_id('2'); //ambil dari session
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
+		// print_r($data['kegiatan']); die;
+		if(empty($data['kegiatan'])){
+			echo "<script>alert('Data yang dicari tidak ditemukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		}
+		// print_r($data['user']['role']); die;
+		if(($data['user']['role'] == '1') || ($data['user']['id']==$data['kegiatan']['pengaju'])){
+			
+		}else{
+			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		}
+		// if($data['kegiatan'][''])
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required', [
 			'required' => 'Nama Tidak Boleh Kosong'
 		]);
 		if ($this->form_validation->run() == false) {
-			$this->load->view('layout/header');
+			$this->load->view('layout/header', $data);
 			$this->load->view('detail/index', $data);
 			$this->load->view('layout/footer');
 		} else {
