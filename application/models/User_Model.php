@@ -49,5 +49,4 @@ class User_Model extends CI_Model
         return $this->db->query("select * from user
         Where username='".$username."' AND password='".$password."'")->row();
     }
-
 }

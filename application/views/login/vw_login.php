@@ -18,6 +18,7 @@
       <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
       <meta name="author" content="codedthemes" />
       <!-- Favicon icon -->
+
       <link rel="icon" href="assets1/images/favicon.ico" type="image/x-icon">
       <!-- Google font-->     
       <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
@@ -34,6 +35,7 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="assets1/css/style.css">
   </head>
+
   <body themebg-pattern="theme1">
   <!-- Pre-loader start -->
   <div class="theme-loader">
@@ -89,14 +91,15 @@
       </div>
   </div>
   <!-- Pre-loader end -->
+
     <section class="login-block">
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-                    
                         <form class="md-float-material form-material" method="POST" action="<?=base_url('login/cek_login')?>" >
+
                             <div class="text-center">
                                 <img src="assets1/images/logo.png" alt="logo.png">
                             </div>
@@ -194,3 +197,4 @@
 <script type="text/javascript" src="assets1/js/common-pages.js"></script>
 </body>
 </html>
+
