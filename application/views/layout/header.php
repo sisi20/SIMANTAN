@@ -32,7 +32,7 @@
       </div>
 
       <ul class="list-unstyled components container-fluid">
-        <li><a href="<?=base_url('kegiatan')?>" class="font">List Kegiatan</a></li>
+        <li><a href="<?=base_url('kegiatan/index')?>" class="font">List Kegiatan</a></li>
         <li><a href="<?=base_url('kegiatan/tambah')?>" class="font">Tambah Kegiatan</a></li>
 
         <!-- <li class="active">
