@@ -1,0 +1,9 @@
+= Header diberi judul berdasarkan masing page
+= Semua page pada sisi kiri ada sub menu, Log out, tambah,  list kegiatan
+= list hanya untuk user bersangkutan untuk detail, jika tidak, detail tidak ada. Satgas muncul semua. 
+= Sort list dengan pagination, sort berdasarkan approve dan prioritas. 
+= perbaiki page UI
+= Error Handling 404, dan inputan salah. 
+
+Login
+= 

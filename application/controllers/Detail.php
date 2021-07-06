@@ -30,25 +30,41 @@ class Detail extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$data['user'] = $this->User_Model->get_by_id('2');
+		$data['judul'] = "Halaman List";
+		$data['kegiatan'] = $this->Kegiatan_Model->get();
+		$this->load->view("layout/header", $data);
+		$this->load->view("kegiatan/vw_kegiatan", $data);
+		$this->load->view("layout/footer", $data);
 	}
 
 	public function komentar($kegiatan = '1')
 	{
-		$data['user'] = $this->User_Model->get_by_id('2'); //ambil dari session
+		$data['user'] = $this->User_Model->get_by_id('1'); //ambil dari session
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
+		$data['judul'] = "Halaman Detail ".$data['kegiatan']['kegiatan'];
+		// print_r($data['kegiatan']); die;
+		if(empty($data['kegiatan'])){
+			echo "<script>alert('Data yang dicari tidak ditemukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		}
+		// print_r($data['user']['role']); die;
+		if(($data['user']['role'] == '1') || ($data['user']['id']==$data['kegiatan']['pengaju'])){
+			
+		}else{
+			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		}
+		// if($data['kegiatan'][''])
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required', [
 			'required' => 'Nama Tidak Boleh Kosong'
 		]);
 		if ($this->form_validation->run() == false) {
-			$this->load->view('layout/header');
+			$this->load->view('layout/header', $data);
 			$this->load->view('detail/index', $data);
 			$this->load->view('layout/footer');
 		} else {
 			if ($data['kegiatan']['status'] == 1) {
-				echo "<script> alert('mau nge hack yaaa'); document.location.href = '".base_url()."';</script>";
-
+				echo "<script> alert('mau nge hack yaaa'); document.location.href = '" . base_url() . "';</script>";
 			} else {
 				$input = [
 					'user' => $this->input->post('user'),
@@ -68,5 +84,13 @@ class Detail extends CI_Controller
 	{
 		$this->Kegiatan_Model->gantiStatus($id);
 		redirect('kegiatan/');
+	}
+
+	public function LihatDetail($id)
+	{
+		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($id);
+		$this->load->view('layout/header');
+		$this->load->view('detail/detail', $data);
+		$this->load->view('layout/footer');
 	}
 }

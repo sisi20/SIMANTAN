@@ -21,16 +21,17 @@ class Login extends CI_Controller {
         $cek_login=$this->User_Model->login($username,$password);
 
             if (empty($cek_login)){
-            redirect('/');
+             redirect('login');
             }
             else{
                 $this->session->set_userdata('user', $cek_login);
                    if($this->session->userdata('user')->role =='1'){
                    $this->session->set_userdata('user', $cek_login);
-                     redirect('kegiatan/vw_kegiatan');
+                     redirect('kegiatan/');
                    }else if($this->session->userdata('user')->role =='2' ){
                        $this->session->set_userdata('user', $cek_login);
-                       redirect('/');
+                       redirect('kegiatan/');
+
                    }else{
                        echo "Anda tidak berhak mengakses Website ini";
                    }

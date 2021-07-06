@@ -2,16 +2,16 @@
 <html>
 
 <head>
-	<title>Form Tambah Kegiatan</title>
+	<title></title>
 </head>
 
 <body>
 	<form method="post" action="">
-		<table>
+		<table class="table">
 
 			<tr>
-				<td><label>Kegiatan : </label></td>
-				<td><input type="text" name="kegiatan" value="<?= set_value('kegiatan'); ?>" placeholder="Nama Kegiatan"> </td>
+				<td><label>Kegiatan </label></td>
+				<td><input type="text" name="kegiatan" value="<?= set_value('kegiatan'); ?>" placeholder="Nama Kegiatan" class="form-control"> </td>
 			<tr>
 				<td>
 				<td><?= form_error('kegiatan', '<small class="text-danger pl-3">', '</small>'); ?></td>
@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td>
-				<td><input type="text" name="kegiatan_unit" value="<?= set_value('kegiatan_unit'); ?>" placeholder="Nama Unit Pengaju Kegiatan"></td>
+				<td><input type="text" name="kegiatan_unit" value="<?= set_value('kegiatan_unit'); ?>" placeholder="Nama Unit Pengaju Kegiatan" class="form-control"></td>
 				</td>
 			</tr>
 			<tr>
@@ -29,7 +29,7 @@
 			</tr>
 			<tr>
 				<td>
-				<td><input type="text" name="kegiatan_peserta" value="<?= set_value('kegiatan_peserta'); ?>" placeholder="Darimana Peserta Kegiatan"></td>
+				<td><input type="text" name="kegiatan_peserta" value="<?= set_value('kegiatan_peserta'); ?>" placeholder="Darimana Peserta Kegiatan" class="form-control"></td>
 				</td>
 			</tr>
 			<tr>
@@ -38,9 +38,16 @@
 				</td>
 			</tr>
 			<tr>
+				<td></td>
 				<td>
-				<td><input type="text" name="kegiatan_jmlpeserta" value="<?= set_value('kegiatan_jmlpeserta'); ?>" placeholder="Jumlah Peserta"></td>
+					<div class="input-group mb-3">
+						<input type="number" class="form-control" placeholder="Jumlah Peserta Kegiatan" aria-describedby="basic-addon2" name="kegiatan_jmlpeserta" value="<?= set_value('kegiatan_jmlpeserta'); ?>">
+						<div class="input-group-append">
+							<span class="input-group-text" id="basic-addon2">Orang</span>
+						</div>
+					</div>
 				</td>
+				<!-- <td><input type="text" name="kegiatan_jmlpeserta" value="<?php // set_value('kegiatan_jmlpeserta'); ?>" placeholder="Jumlah Peserta Kegiatan" class="form-control"></td> -->
 			</tr>
 			<tr>
 				<td>
@@ -53,9 +60,9 @@
 			</tr>
 
 			<tr>
-				<td><label>Prioritas : </label></td>
+				<td><label>Prioritas </label></td>
 				<td>
-					<select name="prioritas" value="<?= set_value('prioritas'); ?>">
+					<select name="prioritas" value="<?= set_value('prioritas'); ?>" class="form-control">
 						<option value="">Pilih Prioritas</option>
 						<option value="Biasa">Biasa</option>
 						<option value="Sedang">Sedang</option>
@@ -69,7 +76,10 @@
 			</tr>
 			<tr>
 				<td>
-				<td><input type="text" name="prioritas_alasan" value="<?= set_value('prioritas_alasan'); ?>" placeholder="Alasan"></td>
+				<td>
+					<!-- <input type="textarea" name="prioritas_alasan" value="<?= set_value('prioritas_alasan'); ?>" placeholder="Alasan Prioritas Kegiatan"> -->
+					<textarea name="prioritas_alasan" placeholder="Alasan Prioritas Kegiatan" rows="5" class="form-control"><?= set_value('prioritas_alasan'); ?></textarea>
+				</td>
 				</td>
 			</tr>
 			<tr>
@@ -81,11 +91,11 @@
 			</tr>
 
 			<tr>
-				<td><label>Penanggung Jawab : </label></td>
+				<td><label>Penanggung Jawab </label></td>
 				<td>
-					<select name="penanggung_jawab" value="<?= set_value('penanggung_jawab'); ?>">
+					<select name="penanggung_jawab" value="<?= set_value('penanggung_jawab'); ?>" class="form-control">
 						<option value="">Pilih Penanggung Jawab</option>
-						<?php foreach ($user as $u) : ?>
+						<?php foreach ($listUser as $u) : ?>
 							<option value="<?= $u['id']; ?>"><?= $u['nama']; ?></option>
 						<?php endforeach; ?>
 					</select>
@@ -98,8 +108,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Waktu / Tempat : </label></td>
-				<td><input type="datetime-local" name="waktu" value="<?= set_value('waktu'); ?>"> </td>
+				<td><label>Waktu</label></td>
+				<td><input type="datetime-local" name="waktu" value="<?= set_value('waktu'); ?>" class="form-control"> </td>
 			</tr>
 			<tr>
 				<td>
@@ -111,12 +121,12 @@
 					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 					<script type='text/javascript'>
 						$(window).load(function() {
-							$("#lokasi").change(function() {
-								console.log($("#lokasi option:selected").val());
-								if ($("#lokasi option:selected").val() == 'Outdoor') {
+							$("#tempat").change(function() {
+								console.log($("#tempat option:selected").val());
+								if ($("#tempat option:selected").val() == 'Outdoor') {
 									$('#ruangan').prop('hidden', false);
 									$('#ruangan2').prop('hidden', 'true');
-								} else if ($("#lokasi option:selected").val() == 'Indoor') {
+								} else if ($("#tempat option:selected").val() == 'Indoor') {
 									$('#ruangan').prop('hidden', 'true');
 									$('#ruangan2').prop('hidden', false);
 								} else {
@@ -127,9 +137,9 @@
 						});
 					</script>
 					<label>
-						Lokasi : <br />
+						Lokasi <br />
 				<td>
-					<select id="lokasi" name="lokasi">
+					<select name="tempat" id="tempat" class="form-control">
 						<option value="">Pilih Lokasi</option>
 						<option value="Outdoor">Outdoor</option>
 						<option value="Indoor">Indoor</option>
@@ -137,32 +147,35 @@
 				</td>
 			<tr>
 				<td>
-				<td><input type="text" placeholder="Lokasi Outdoor" name="lokasiOut" id="ruangan" hidden /></td>
+				<td><?= form_error('tempat', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><input type="text" placeholder="Lokasi Outdoor" name="lokasiOut" id="ruangan" hidden class="form-control" /></td>
 				</td>
 			</tr>
 			<tr>
 				<td>
 				<td>
-					<select name="lokasiIn" value="" id="ruangan2" hidden>
+					<select name="lokasiIn" value="" id="ruangan2" hidden class="form-control">
 						<option value="">Pilih Ruangan</option>
 						<?php
 						$i = 101;
 						while ($i <= 134) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						?>
+						?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																			$i++;
+																		}
+																			?>
 						<option value="R.139">R.139</option>
 						<option value="R.140">R.140</option>
 						<?php
 						$i = 201;
 						while ($i <= 216) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						?>
+						?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																			$i++;
+																		}
+																			?>
 						<option value="R.219">R.219</option>
 						<option value="R.220">R.220</option>
 						<option value="R.227">R.227</option>
@@ -170,34 +183,29 @@
 						<?php
 						$i = 231;
 						while ($i <= 234) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						?>
+						?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																			$i++;
+																		}
+																			?>
 						<option value="R.239">R.239</option>
 						<option value="R.240">R.240</option>
 						<?php
 						$i = 301;
 						while ($i <= 306) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						$i = 309;
-						while ($i <= 311) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						$i = 314;
-						while ($i <= 330) {
-						?><option value="R.<?= $i ?>">R.<?= $i ?></option>
-						<?php
-							$i++;
-						}
-						?>
-
+						?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																			$i++;
+																		}
+																		$i = 309;
+																		while ($i <= 311) {
+																			?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																																$i++;
+																															}
+																															$i = 314;
+																															while ($i <= 330) {
+																																?><option value="R.<?= $i ?>">R.<?= $i ?></option><?php
+																																														$i++;
+																																													}
+																																														?>
 						<option value="R.192">R.192</option>
 						<option value="R.193">R.193</option>
 						<option value="R.282">R.282</option>
@@ -254,8 +262,8 @@
 			</tr>
 
 			<tr>
-				<td><label>Pelaksana : </label></td>
-				<td><input type="text" name="pelaksana" value="<?= set_value('pelaksana'); ?>" placeholder="Unit / Tim Pelaksana Kegiatan"> </td>
+				<td><label>Pelaksana </label></td>
+				<td><input type="text" name="pelaksana" value="<?= set_value('pelaksana'); ?>" placeholder="Unit / Tim Pelaksana Kegiatan" class="form-control"> </td>
 			</tr>
 			<tr>
 				<td>
@@ -263,18 +271,54 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Skema Kegiatan <br>Terhadap Prokes: </label></td>
-				<td><input type="textarea" name="skema" placeholder="Skema Kegiatan" value="<?= set_value('skema'); ?>"> </td>
+				<td><label>Skema Kegiatan <br>Terhadap Prokes </label></td>
+				<td>
+					<textarea name="skema_proses_masuk_keluar" placeholder="Proses Peserta Masuk Dan Keluar Kampus" rows="4" class="form-control"><?= set_value('skema_proses_masuk_keluar'); ?></textarea>
+				</td>
 			</tr>
 			<tr>
 				<td>
-				<td><?= form_error('skema', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				<td><?= form_error('skema_proses_masuk_keluar', '<small class="text-danger pl-3">', '</small>'); ?></td>
 				</td>
 			</tr>
-
+			<tr>
+				<td>
+				<td><textarea name="skema_penerapan_prokes" placeholder="Penerapan Prokes Ke Peserta" rows="4" class="form-control"><?= set_value('skema_penerapan_prokes'); ?></textarea></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><?= form_error('skema_penerapan_prokes', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><textarea name="skema_kegiatan_berlangsung" placeholder="Skema Selama Kegiatan Berlangsung" rows="4" class="form-control"><?= set_value('skema_kegiatan_berlangsung'); ?></textarea></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><?= form_error('skema_kegiatan_berlangsung', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><textarea name="skema_kegiatan_selesai" placeholder="Skema Setelah Kegiatan Selesai" rows="4" class="form-control"><?= set_value('skema_kegiatan_selesai'); ?></textarea></td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<td><?= form_error('skema_kegiatan_selesai', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" name="tombol" value="Tambah" class="form-control btn btn-success" /></td>
+			</tr>
 		</table>
-		<input type="hidden" id="status" name="status" value="Belum Di Approve">
-		<input type="submit" name="tombol" value="Tambah" />
+		<input type="hidden" id="status" name="status" value="0">
+		<input type="hidden" id="pengaju" name="pengaju" value="<?= $user['id'] ?>">
+
 	</form>
 </body>
 

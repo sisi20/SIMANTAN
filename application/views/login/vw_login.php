@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>SIMANTAN</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -98,8 +98,8 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-                    
-                        <form class="md-float-material form-material" method="POST" action="Login/cek_login" >
+                        <form class="md-float-material form-material" method="POST" action="<?=base_url('login/cek_login')?>" >
+
                             <div class="text-center">
                                 <img src="assets1/images/logo.png" alt="logo.png">
                             </div>
@@ -196,5 +196,5 @@
 <script type="text/javascript" src="bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
 <script type="text/javascript" src="assets1/js/common-pages.js"></script>
 </body>
-
 </html>
+

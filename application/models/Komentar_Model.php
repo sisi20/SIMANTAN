@@ -24,6 +24,7 @@ class Komentar_Model extends CI_Model
         $this->db->from('komentar k');
         $this->db->join('user u', 'u.id = k.user');
         $this->db->where('k.kegiatan', $kegiatan);
+        $this->db->order_by('tanggal asc');
         $query = $this->db->get();
         return $query->result_array();
     }
