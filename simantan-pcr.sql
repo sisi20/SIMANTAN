@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2021 at 05:46 AM
+-- Generation Time: Jul 06, 2021 at 07:25 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -29,13 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kegiatan` (
   `id` int(11) NOT NULL,
+  `pengaju` int(11) NOT NULL,
   `kegiatan` varchar(100) NOT NULL,
+  `kegiatan_unit` varchar(100) NOT NULL,
+  `kegiatan_peserta` varchar(100) NOT NULL,
+  `kegiatan_jmlpeserta` varchar(100) NOT NULL,
   `prioritas` varchar(50) NOT NULL,
+  `prioritas_alasan` varchar(100) NOT NULL,
   `penanggung_jawab` int(11) NOT NULL,
   `waktu` datetime NOT NULL,
+  `tempat` varchar(100) NOT NULL,
   `lokasi` varchar(50) NOT NULL,
   `pelaksana` varchar(50) NOT NULL,
-  `skema` text NOT NULL,
+  `skema_proses_masuk_keluar` text NOT NULL,
+  `skema_penerapan_prokes` text NOT NULL,
+  `skema_kegiatan_berlangsung` text NOT NULL,
+  `skema_kegiatan_selesai` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -43,9 +52,14 @@ CREATE TABLE `kegiatan` (
 -- Dumping data for table `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id`, `kegiatan`, `prioritas`, `penanggung_jawab`, `waktu`, `lokasi`, `pelaksana`, `skema`, `status`) VALUES
-(1, 'Test Kegiatan', 'Tinggi', 2, '2021-07-02 20:09:13', 'Pekan baru', 'HIMA', 'Test Kegiatan untuk buat komentar', 1),
-(2, 'Test Kegiatan ke2', 'Tinggi', 1, '2021-07-03 06:57:41', 'Pekan baru', 'HIMA', 'Test Skema yang ke 2', 0);
+INSERT INTO `kegiatan` (`id`, `pengaju`, `kegiatan`, `kegiatan_unit`, `kegiatan_peserta`, `kegiatan_jmlpeserta`, `prioritas`, `prioritas_alasan`, `penanggung_jawab`, `waktu`, `tempat`, `lokasi`, `pelaksana`, `skema_proses_masuk_keluar`, `skema_penerapan_prokes`, `skema_kegiatan_berlangsung`, `skema_kegiatan_selesai`, `status`) VALUES
+(8, 3, 'Workshop Framework', 'HIMA ITSA', 'Anggota ITSA', '100', 'Sedang', 'Sebuah Workshop Framework Yang Dilakukan Rutin Setiap Tahun', 2, '2021-12-20 09:00:00', 'Outdoor', 'Gedung Serba Guna', 'HIMA ITSA', 'Peserta Masuk Kampus Dengan Cek Suhu Tubuh Dan Menggunakan Sanitizer.\r\nPeserta Keluar Kampus Dengan Sanitizer.', 'Peserta Wajib Menggunakan Masker Dan Faceshield Saat Kegiatan Berlangsung, Dilarang Membuka Masker.\r\nPeserta Melakukan Social Distancing.', 'Pembukaan\r\nMulai Acara\r\nPenghargaan\r\nPenutupan', 'Melakukan Upacara Penutupan.\r\nPeserta Melakukan Disinfektan Mandiri (Cuci Tangah, Dll)\r\nRuangan Yang Dipakai Di Disinfektan', 1),
+(19, 4, 'HimaFest', 'BEM', 'PCR', '100', 'Sedang', 'Acara Tahunan', 4, '2021-08-01 13:44:00', 'Indoor', 'R.Studio Gambar', 'BEM', 'Masuk lewat portal depan menuju main hall, menuju GSG', 'Gunakan Masker, Social Distancing', 'Gunakan Masker, Social Distancing', 'Ruangan yang digunakan akan di sterilisasi.', 1),
+(20, 2, 'a', 'a', 'a', 'a', 'Biasa', 'a', 2, '2021-07-07 00:47:00', 'Indoor', 'R.101', 'a', 'a', 'a', 'a', 'a', 0),
+(21, 2, 'a', 'a', 'a', 'a', 'Biasa', 'a', 2, '2021-07-07 00:47:00', 'Indoor', 'R.101', 'a', 'a', 'a', 'a', 'a', 0),
+(23, 2, 'q', 'q', 'q', 'q', 'Biasa', 'q', 2, '2021-07-06 02:36:00', 'Indoor', 'R.118', 'q', 'q', 'q', 'q', 'q', 1),
+(24, 2, 'w', 'w', 'w', '10', 'Biasa', 'w', 3, '2021-07-30 03:02:00', 'Outdoor', 'w', 'w', 'w', 'w', 'w', 'w', 0),
+(25, 2, 'a', 'a', 'a', '1', 'Biasa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 2, '2021-07-06 03:36:00', 'Indoor', 'R.118', 'a', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 0);
 
 -- --------------------------------------------------------
 
@@ -57,7 +71,7 @@ CREATE TABLE `komentar` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `kegiatan` int(11) NOT NULL,
-  `komentar` varchar(100) NOT NULL,
+  `komentar` text NOT NULL,
   `tanggal` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -66,14 +80,30 @@ CREATE TABLE `komentar` (
 --
 
 INSERT INTO `komentar` (`id`, `user`, `kegiatan`, `komentar`, `tanggal`) VALUES
-(1, 1, 1, 'Komentar Test', '2021-07-02 12:00:00'),
-(2, 2, 1, 'Test yang kedua asdasda;sda;saklfjaKLdaklgjskgjsdlslgsgsgpwejpwjrowjtklwtklw', '2021-07-02 13:00:00'),
-(9, 1, 1, 'test waktu 3', '2021-07-03 10:44:58'),
-(10, 2, 2, 'Test Kegiatan 2', '2021-07-03 12:00:10'),
-(11, 2, 2, 'test', '2021-07-03 12:24:36'),
-(12, 2, 2, 'test disa', '2021-07-03 12:25:19'),
-(13, 2, 2, 'test disable', '2021-07-03 12:26:13'),
-(14, 2, 1, 'test disabled1', '2021-07-03 12:27:53');
+(16, 2, 8, 'Test Komentar', '2021-07-05 11:13:32'),
+(17, 2, 8, 'Test Komentar 2', '2021-07-05 11:22:31'),
+(18, 1, 8, 'Test Satgas', '2021-07-05 11:23:03'),
+(19, 2, 8, 'Test Komentar urutan waktu', '2021-07-05 11:25:02'),
+(20, 1, 8, 'Test Approve', '2021-07-05 11:25:32'),
+(21, 1, 19, 'estimasi Jumlahnya berapa orang?', '2021-07-05 01:52:12'),
+(22, 3, 19, '100 orang bapak/ibuk', '2021-07-05 01:52:57'),
+(23, 1, 21, 'asd', '2021-07-06 01:09:22'),
+(24, 1, 20, 'qwhjekqndkqwndkmqndkjqweknekqnwemkwqneqwjeqkndkqjnmasdnasm c', '2021-07-06 01:29:11'),
+(25, 1, 20, 'a', '2021-07-06 01:30:34'),
+(26, 1, 20, 'a', '2021-07-06 01:30:35'),
+(27, 1, 20, 'a', '2021-07-06 01:30:37'),
+(28, 1, 20, 'a', '2021-07-06 01:30:39'),
+(29, 1, 20, 'a', '2021-07-06 01:30:41'),
+(30, 1, 20, 'a', '2021-07-06 01:30:43'),
+(31, 1, 20, 'a', '2021-07-06 01:30:45'),
+(32, 1, 23, 'Test Drive', '2021-07-06 02:38:25'),
+(33, 2, 23, 'Test Drive Juga', '2021-07-06 02:39:41'),
+(34, 1, 25, 'a', '2021-07-06 11:48:20'),
+(35, 1, 25, 'a', '2021-07-06 11:48:30'),
+(36, 1, 25, 'a', '2021-07-06 11:48:32'),
+(37, 1, 25, 'a', '2021-07-06 11:48:35'),
+(38, 1, 25, 'a', '2021-07-06 11:48:37'),
+(39, 1, 25, 'a', '2021-07-06 11:48:40');
 
 -- --------------------------------------------------------
 
@@ -103,16 +133,20 @@ INSERT INTO `role` (`id`, `role`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `role`) VALUES
-(1, 'SatgasCovid19', 1),
-(2, 'Test', 2);
+INSERT INTO `user` (`id`, `nama`, `role`, `password`, `username`) VALUES
+(1, 'SatgasCovid19', 1, 'admin', 'admin'),
+(2, 'Staff', 2, 'staff', 'staff'),
+(3, 'Prathama Rifqi Syafitrah', 2, 'thama', 'thama'),
+(4, 'Zainal Arifin Renaldo, S.S., M.Hum.', 2, 'mrjay', 'mrjay');
 
 --
 -- Indexes for dumped tables
@@ -123,7 +157,8 @@ INSERT INTO `user` (`id`, `nama`, `role`) VALUES
 --
 ALTER TABLE `kegiatan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_kegiatan_user` (`penanggung_jawab`);
+  ADD KEY `fk_kegiatan_user` (`penanggung_jawab`),
+  ADD KEY `fk_kegi` (`pengaju`);
 
 --
 -- Indexes for table `komentar`
@@ -154,19 +189,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -176,7 +211,8 @@ ALTER TABLE `user`
 -- Constraints for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  ADD CONSTRAINT `fk_kegiatan_user` FOREIGN KEY (`penanggung_jawab`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `fk_kegi` FOREIGN KEY (`pengaju`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `fk_kegiatan_user` FOREIGN KEY (`penanggung_jawab`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `komentar`
