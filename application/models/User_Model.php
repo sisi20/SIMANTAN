@@ -49,4 +49,9 @@ class User_Model extends CI_Model
         return $this->db->query("select * from user
         Where username='".$username."' AND password='".$password."'")->row();
     }
+
+    public function register($table, $data)
+    {
+        return $this->db->insert($table, $data);
+    }
 }

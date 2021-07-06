@@ -76,7 +76,7 @@
 
       <ul class="list-unstyled CTAs naik">
         <li>
-          <a href="#logout" class="download font-weight-bold">Logout</a>
+          <a href="<?php echo base_url('index.php/login/logout'); ?>" class="download font-weight-bold">Logout</a>
         </li>
       </ul>
 
