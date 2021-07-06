@@ -30,14 +30,20 @@ class Detail extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$data['user'] = $this->User_Model->get_by_id('2');
+		$data['judul'] = "Halaman List";
+		$data['kegiatan'] = $this->Kegiatan_Model->get();
+		$this->load->view("layout/header", $data);
+		$this->load->view("kegiatan/vw_kegiatan", $data);
+		$this->load->view("layout/footer", $data);
 	}
 
 	public function komentar($kegiatan = '1')
 	{
-		$data['user'] = $this->User_Model->get_by_id('2'); //ambil dari session
+		$data['user'] = $this->User_Model->get_by_id('1'); //ambil dari session
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
+		$data['judul'] = "Halaman Detail ".$data['kegiatan']['kegiatan'];
 		// print_r($data['kegiatan']); die;
 		if(empty($data['kegiatan'])){
 			echo "<script>alert('Data yang dicari tidak ditemukan'); document.location.href = '" . base_url('kegiatan')."'</script>";

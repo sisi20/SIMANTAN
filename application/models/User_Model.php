@@ -24,6 +24,12 @@ class User_Model extends CI_Model
         return $query->row_array();
     }
 
+    public function getStaff()
+    {
+        $query = $this->db->get_where($this->tabel, array('role' => "2"));
+        return $query->result_array();
+    }
+
     public function update($where, $data)
     {
         $this->db->update($this->tabel, $data, $where);

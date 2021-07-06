@@ -13,10 +13,11 @@ class Kegiatan extends CI_Controller
 
 	function index()
 	{
-		$data['user'] = $this->User_model->get_by_id('3');
+		$data['user'] = $this->User_model->get_by_id('2');
 		// print_r($data['user']->nama); die;
 		// $data['user'] = $this->session->userdata('user'); 
 		$data['kegiatan'] = $this->Kegiatan_model->get();
+		$data['judul'] = "Halaman List";
 		$this->load->view("layout/header", $data);
 		$this->load->view("kegiatan/vw_kegiatan", $data);
 		$this->load->view("layout/footer", $data);
@@ -28,8 +29,9 @@ class Kegiatan extends CI_Controller
 		// $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['user'] = $this->User_model->get();
 
-		$data['listUser'] = $this->User_model->get();
+		$data['listUser'] = $this->User_model->getStaff();
 		$data['user'] = $this->User_model->get_by_id('2');
+		$data['judul'] = "Halaman Tambah Kegiatan";
 		if($this->input->post('lokasiIn')==NULL){
 			$this->form_validation->set_rules('lokasiOut', 'Lokasi Out', 'required', array('required' => 'Lokasi Kegiatan Wajib Di Isi'));
 		}else{

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-info mb-2">Tambah Kegiatan</a></div>
+        <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-success mb-2">Tambah Kegiatan</a></div>
 
         <table class="table table-stripped">
             <thead>
