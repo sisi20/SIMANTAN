@@ -7,7 +7,7 @@
                     <tr>
                         <td class="col-md-3"><label>Pengaju </label></td>
                         <td class="col-md-9">
-                            <p class="form-control text-break "><?= $user['nama'] ?></p>
+                            <p class="form-control text-break "><?= $kegiatan['nama_pengaju'] ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -126,7 +126,7 @@
 
             <h3>Status Pengajuan Kegiatan</h3>
             <hr />
-            <?php if (($user['role'] == '1') || ($user['role'] == '2' && !empty($komentar))) { ?>
+            <?php if (($user['role'] == '1') || ($user['id'] == $kegiatan['pengaju'] && !empty($komentar))) { ?>
                 <div class="overflow-auto" style="min-height: 20px; max-height: 46em;">
                     <?php foreach ($komentar as $k) : ?>
                         <!--  Mengambil data komentar -->
@@ -147,11 +147,11 @@
                                 </footer>
                             </div>
                         </div>
-                        <br />
+                        <br/>
                     <?php endforeach; ?>
 
                 </div>
-                <div class="" style="margin-top: 25px;">
+                <div class="" style="margin-top: 25px; margin-bottom: 50px;">
                     <hr />
                     <?php if ($kegiatan['status'] == 0) { ?>
                         <div class="input-group flex-nowrap">

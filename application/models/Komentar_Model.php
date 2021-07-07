@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Komentar_Model extends CI_Model
+class Komentar_model extends CI_Model
 {
     public $tabel = "komentar";
     public $id = "komentar.id";
@@ -29,18 +29,9 @@ class Komentar_Model extends CI_Model
         return $query->result_array();
     }
 
-    public function update($where, $data)
-    {
-        $this->db->update($this->tabel, $data, $where);
-    }
-
     public function insert($data)
     {
         $this->db->insert($this->tabel, $data);
     }
 
-    public function delete($id)
-    {
-        $this->db->delete($this->tabel, array('id' => $id));
-    }
 }

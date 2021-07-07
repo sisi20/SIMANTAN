@@ -11,7 +11,7 @@
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <!-- Our Custom CSS -->
-  <link rel="stylesheet" href="<?= base_url('assets/custom.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets1/custom.css'); ?>">
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -28,11 +28,12 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header fonts">
-        <h3 class="fonts">SIMANTAN-PCR</h3>
+        <h3 class="fonts">SiManTan-PCR</h3>
+        <img src="<?= base_url('assets1/img/Politeknik_Caltex_Riau.png') ?>" class="img-fluid">
       </div>
 
       <ul class="list-unstyled components container-fluid">
-        <li><a href="<?= base_url('kegiatan/index') ?>" class="font">List Kegiatan</a></li>
+        <li><a href="<?= base_url('kegiatan') ?>" class="font">List Kegiatan</a></li>
         <li><a href="<?= base_url('kegiatan/tambah') ?>" class="font">Tambah Kegiatan</a></li>
 
         <!-- <li class="active">
@@ -76,15 +77,18 @@
 
       <ul class="list-unstyled CTAs naik">
         <li>
-          <a href="<?php echo base_url('index.php/login/logout'); ?>" class="download font-weight-bold">Logout</a>
+          <a href="<?=base_url('login/logout')?>" class="download font-weight-bold">Logout</a>
         </li>
       </ul>
 
-      <span class="fixed-bottom">&copy;2021 Politeknik Caltex Riau</span>
+      <span class="fixed-bottom"><a href="https://pcr.ac.id/">&copy;2021 Politeknik Caltex Riau</a></span>
     </nav>
     <!-- Page Content  -->
     <div id="content">
 
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12 font"> <p style="margin-top: 10px; margin-bottom: 10px;"><center>Selamat Datang</center></p> </div>
+      </div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <button type="button" id="sidebarCollapse" class="btn btn-success">
@@ -95,14 +99,20 @@
                       <i class="fas fa-align-justify"></i>
                     </button> -->
 
-          <div class="col-md-3 collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="font">SIMANTAN</div>
+          <div class="col-md-6 collapse navbar-collapse" id="navbarSupportedContent">
+            <ul style=" list-style-type: none; margin-bottom: auto; margin-left: -20px;">
+              <li>
+                <div class="font FontKiri">SiManTan-PCR</div>
+              </li>
+              <li>
+                <div class="font FontKiri" style="font-size: 14px;">Sistem Manajemen Kegiatan PCR</div>
+              </li>
+            </ul>
           </div>
-          <div class="col-md-7 ">
 
+          <div class="col-md-6 collapse navbar-collapse" id="navbarSupportedContent">
+            <div class=" font FontKanan"><?= $user['nama'] ?></div>
           </div>
-          <div class="col-md-2 collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="font"><?= $this->session->userdata('username') ?></div>
-          </div>
+
         </div>
       </nav>
