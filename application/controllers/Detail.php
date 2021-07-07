@@ -91,17 +91,23 @@ class Detail extends CI_Controller
 
 	public function approve($id)
 	{
-		// print_r($user);die;
+		$data = $this->Kegiatan_Model->get_by_id($id);
+		
 		if($this->session->userdata('role') == 1)
 		{
-			$where = ['satgas' => $this->session->userdata('email')];
+			$data = ['satgas' => $this->session->userdata('email')];
 		}else if($this->session->userdata('role') == 5)
 		{
-			$where = ['satgas'=>$this->session->userdata('email'), 'kasatgas'=>$this->session->userdata('email'),];
+			if ($data['satgas'] != 'Menunggu'){
+				$data = ['kasatgas'=>$this->session->userdata('email'),];
+			}else{
+				$data = ['satgas'=>$this->session->userdata('email'), 'kasatgas'=>$this->session->userdata('email'),];
+			}
+			
 		}else{
 			echo "<script> alert('UnAuthorized'); document.location.href = '" . base_url() . "';</script>";
 		}
-		$this->Kegiatan_Model->gantiStatus($id , $where);
+		$this->Kegiatan_Model->gantiStatus($id , $data);
 		redirect('kegiatan/');
 	}
 
