@@ -20,9 +20,9 @@ class Komentar_model extends CI_Model
     public function get_by_id($kegiatan)
     {
         //SELECT k.*, u.nama FROM komentar k, user u WHERE k.user = u.id AND k.kegiatan = 1
-        $this->db->select('k.*, u.nama as user');
+        $this->db->select('k.*, u.nama as nama_user');
         $this->db->from('komentar k');
-        $this->db->join('user u', 'u.id = k.user');
+        $this->db->join('user u', 'u.email = k.user');
         $this->db->where('k.kegiatan', $kegiatan);
         $this->db->order_by('tanggal asc');
         $query = $this->db->get();

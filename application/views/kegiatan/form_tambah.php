@@ -8,7 +8,6 @@
 <body>
 	<form method="post" action="">
 		<table class="table">
-
 			<tr>
 				<td><label>Kegiatan </label></td>
 				<td><input type="text" name="kegiatan" value="<?= set_value('kegiatan'); ?>" placeholder="Nama Kegiatan" class="form-control"> </td>
@@ -96,7 +95,7 @@
 					<select name="penanggung_jawab" value="<?= set_value('penanggung_jawab'); ?>" class="form-control">
 						<option value="">Pilih Penanggung Jawab</option>
 						<?php foreach ($listUser as $u) : ?>
-							<option value="<?= $u['id']; ?>"><?= $u['nama']; ?></option>
+							<option value="<?= $u['email']; ?>"><?= $u['nama']; ?></option>
 						<?php endforeach; ?>
 					</select>
 
@@ -316,8 +315,9 @@
 				<td><input type="submit" name="tombol" value="Tambah" class="form-control btn btn-success" /></td>
 			</tr>
 		</table>
-		<input type="hidden" id="status" name="status" value="0">
-		<input type="hidden" id="pengaju" name="pengaju" value="<?= $user['id'] ?>">
+		<input type="hidden" id="status" name="satgas" value="Menunggu">
+		<input type="hidden" id="status" name="kasatgas" value="Menunggu">
+		<input type="hidden" id="pengaju" name="pengaju" value="<?= $this->session->userdata('email') ?>">
 
 	</form>
 </body>

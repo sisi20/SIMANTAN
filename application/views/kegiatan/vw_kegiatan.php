@@ -10,12 +10,12 @@
 </head>
 
 <body>
-  <section class="section">
+  <section class="">
     <div class="container">
       <div class="col-md-6">
         <p>List Kegiatan</p>
       </div><br>
-      <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-info">Tambah Kegiatan</a></div><br>
+      <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-success">Tambah Kegiatan</a></div><br>
 
       <table class="table is-narrow" id="tabeluser">
         <thead>
@@ -23,7 +23,8 @@
           <th scope="col">Prioritas</th>
           <th scope="col">PIC</th>
           <th scope="col">Waktu</th>
-          <th scope="col">Status</th>
+          <th scope="col">Status Satgas</th>
+          <th scope="col">Status KaSatGas</th>
           <th scope="col">Aksi</th>
         </thead>
         <tbody>
@@ -31,20 +32,27 @@
             <tr>
               <td><?= $k['kegiatan'] ?></td>
               <td><?= $k['prioritas'] ?></td>
-              <td><?= $k['nama'] ?></td>
+              <td><?= $k['penanggung_jawab'] ?></td>
               <td><?= $k['waktu'] ?></td>
               <td>
-                <?php if ($k['status'] == 1) { ?>
-                  <p class="btn btn-success">Approved</p>
-                <?php } else { ?>
+                <?php if ($k['satgas'] == "Menunggu") { ?>
                   <p class="btn btn-warning">Menunggu</p>
+                <?php } else { ?>
+                  <p class="btn btn-success"><?= $k['satgas']?></p>
                 <?php } ?>
               </td>
               <td>
-                <?php if ($user['role'] == '1' || $user['id'] == $k['pengaju']) { ?>
+              <?php if ($k['kasatgas'] == "Menunggu") { ?>
+                  <p class="btn btn-warning">Menunggu</p>
+                <?php } else { ?>
+                  <p class="btn btn-success"><?= $k['kasatgas']?></p>
+                <?php } ?>
+              </td>
+              <td>
+                <?php if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 5 || $this->session->userdata('email') == $k['pengaju']) { ?>
                   <a href="<?= base_url('detail/komentar/') . $k['id'] ?>" class="linkdetail">Detail</a>
-                  <?php if ($k['status'] == '1') { ?>
-                    | <a href="<?= '#'//base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail">Cetak</a>
+                  <?php if ($k['satgas'] != 'Menunggu' && $k['kasatgas'] != 'Menunggu') { ?>
+                    | <a href="<?= base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail">Cetak</a>
                   <?php } ?>
                 <?php } ?>
               </td>

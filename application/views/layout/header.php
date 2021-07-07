@@ -11,7 +11,7 @@
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <!-- Our Custom CSS -->
-  <link rel="stylesheet" href="<?= base_url('assets1/custom.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets1/simantan.css'); ?>">
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -111,7 +111,7 @@
           </div>
 
           <div class="col-md-6 collapse navbar-collapse" id="navbarSupportedContent">
-            <div class=" font FontKanan"><?= $user['nama'] ?></div>
+            <div class=" font FontKanan"><?= $this->session->userdata('email') ?></div>
           </div>
 
         </div>

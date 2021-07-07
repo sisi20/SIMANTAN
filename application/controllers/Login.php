@@ -7,10 +7,18 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->cek_sesi();
         $this->load->model('User_Model');
         $this->load->library('form_validation');
         $this->load->library('session');
 		$this->load->library('googlefunction');
+    }
+
+    function cek_sesi()
+    {
+        if($this->session->userdata('email') != null){
+            redirect('kegiatan');
+        };
     }
 
     public function index()
@@ -77,7 +85,8 @@ class Login extends CI_Controller
                 $data = [
                     'email' => $user['email'],
                     'role' => $user['role'],
-                    'id' => $user['id']
+                    'id' => $user['id'], 
+                    'nama' => $user['nama']
                 ]; //Membuat data untuk Session
 
                 $this->session->set_userdata($data); //Membuat session Login
@@ -119,7 +128,7 @@ class Login extends CI_Controller
         $this->load->library('session');
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[15]|is_unique[user.email]');
+        $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[50]|is_unique[user.email]');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {

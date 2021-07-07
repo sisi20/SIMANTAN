@@ -12,15 +12,16 @@ class Kegiatan_model extends CI_Model
 
     public function get()
     {
-        $this->db->select('k.*,u.nama as nama');
+        // $this->db->select('k.,u.nama as nama');
+        $this->db->select('k.*');
         $this->db->from('kegiatan k');
-        $this->db->join('user u','k.penanggung_jawab=u.id');   
+        // $this->db->join('user u','k.penanggung_jawab=u.id');
         $this->db->order_by('waktu desc');
         // $this->db->from($this->table);
         $query = $this->db->get();
         return $query->result_array();
     }
-    
+
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
@@ -29,17 +30,18 @@ class Kegiatan_model extends CI_Model
 
     public function get_by_id($kegiatan)
     {
-        $this->db->select('k.*, u.nama as user, b.nama as nama_pengaju');
+        // $this->db->select('k., u.nama as user, b.nama as nama_pengaju');
+        $this->db->select('k.*');
         $this->db->from('kegiatan k');
-        $this->db->join('user u', 'u.id = k.penanggung_jawab');
-        $this->db->join('user b', 'b.id = k.pengaju');
+        // $this->db->join('user u', 'u.id = k.penanggung_jawab');
+        // $this->db->join('user b', 'b.id = k.pengaju');
         $this->db->where('k.id', $kegiatan);
         $query = $this->db->get();
         return $query->row_array();
     }
 
-    public function gantiStatus($id)
+    public function gantiStatus($id, $where)
     {
-        $this->db->update($this->table,array('status'=>'1'), array('id'=>$id));
+        $this->db->update($this->table, $where, array('id' => $id));
     }
 }
