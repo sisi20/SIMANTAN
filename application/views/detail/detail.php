@@ -1,9 +1,6 @@
 <div class="container">
     <div class="row">
         <table class="table table-stripped">
-            <div class="col-md-6">
-                <p><small><?= $user->nama; ?></small> | <a href="<?= base_url('login/logout'); ?>"><small style="color: red;">Logout</small></a></p>
-            </div>
             <thead>
                 <tr>
                 <th scope="col">Nama Kegiatan</th>

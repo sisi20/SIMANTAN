@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title><?= $judul?></title>
+  <title><?= $judul ?></title>
 
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -32,8 +32,8 @@
       </div>
 
       <ul class="list-unstyled components container-fluid">
-        <li><a href="<?=base_url('kegiatan/index')?>" class="font">List Kegiatan</a></li>
-        <li><a href="<?=base_url('kegiatan/tambah')?>" class="font">Tambah Kegiatan</a></li>
+        <li><a href="<?= base_url('kegiatan/index') ?>" class="font">List Kegiatan</a></li>
+        <li><a href="<?= base_url('kegiatan/tambah') ?>" class="font">Tambah Kegiatan</a></li>
 
         <!-- <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
@@ -102,7 +102,7 @@
 
           </div>
           <div class="col-md-2 collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="font"><?= $user['nama'] ?></div>
+            <div class="font"><?= $this->session->userdata('username') ?></div>
           </div>
         </div>
       </nav>

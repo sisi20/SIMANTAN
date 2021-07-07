@@ -43,16 +43,15 @@ class Detail extends CI_Controller
 		$data['user'] = $this->User_Model->get_by_id('1'); //ambil dari session
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
-		$data['judul'] = "Halaman Detail ".$data['kegiatan']['kegiatan'];
+		$data['judul'] = "Halaman Detail " . $data['kegiatan']['kegiatan'];
 		// print_r($data['kegiatan']); die;
-		if(empty($data['kegiatan'])){
-			echo "<script>alert('Data yang dicari tidak ditemukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		if (empty($data['kegiatan'])) {
+			echo "<script>alert('Data yang dicari tidak ditemukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
 		// print_r($data['user']['role']); die;
-		if(($data['user']['role'] == '1') || ($data['user']['id']==$data['kegiatan']['pengaju'])){
-			
-		}else{
-			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		if (($data['user']['role'] == '1') || ($data['user']['id'] == $data['kegiatan']['pengaju'])) {
+		} else {
+			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
 		// if($data['kegiatan'][''])
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required', [
@@ -153,29 +152,29 @@ class Detail extends CI_Controller
 		<td><b>PENANGGUNG JAWAB</b></td>
 		<td colspan="3">' . $data['kegiatan']['user'] . '</td>
 	</tr>');
-	
+
 		$timestamp = strtotime($data['kegiatan']['waktu']);
 		$day = date('l', $timestamp);;
-		if($day == 'Monday'){
+		if ($day == 'Monday') {
 			$day = 'Senin';
-		}else if($day == 'Tuesday'){
+		} else if ($day == 'Tuesday') {
 			$day = 'Selasa';
-		}else if($day == 'Wednesday'){
+		} else if ($day == 'Wednesday') {
 			$day = 'Rabu';
-		}else if($day == 'Thursday'){
+		} else if ($day == 'Thursday') {
 			$day = 'Kamis';
-		}else if($day == 'Friday'){
+		} else if ($day == 'Friday') {
 			$day = 'Jumat';
-		}else if($day == 'Saturday'){
+		} else if ($day == 'Saturday') {
 			$day = 'Sabtu';
-		}else if($day == 'Sunday'){
+		} else if ($day == 'Sunday') {
 			$day = 'Minggu';
 		}
 		$mpdf->WriteHTML('<tr >
 		<td><b>WAKTU / TEMPAT / LOKASI</b></td>
 		<td colspan="3">
 		<p><b>Waktu</b></p>
-		<p>' .$day.' , '. $data['kegiatan']['waktu'] . '</p>
+		<p>' . $day . ' , ' . $data['kegiatan']['waktu'] . '</p>
 		<p><b>Lokasi / Tempat</b></p>
 		<p>' . $data['kegiatan']['tempat'] . '</p>
 		<p>' . $data['kegiatan']['lokasi'] . '</p>
@@ -197,9 +196,9 @@ class Detail extends CI_Controller
 		$mpdf->WriteHTML('<tr colspan="4">
 		<td colspan="1"><b>CATATAN SATGAS</b></td>
 		<td colspan="3">');
-		foreach($data['komentar'] as $k) : 
-			$mpdf->WriteHTML('<p><b>'.$k['user'].'</b> : '.$k['komentar'].'</p>'); 
-		endforeach; 
+		foreach ($data['komentar'] as $k) :
+			$mpdf->WriteHTML('<p><b>' . $k['user'] . '</b> : ' . $k['komentar'] . '</p>');
+		endforeach;
 		$mpdf->WriteHTML('
 		</td>
 		</tr>');

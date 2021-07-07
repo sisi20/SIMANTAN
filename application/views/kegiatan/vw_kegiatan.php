@@ -16,6 +16,7 @@
         <p>List Kegiatan</p>
       </div><br>
       <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-info">Tambah Kegiatan</a></div><br>
+
       <table class="table is-narrow" id="tabeluser">
         <thead>
           <th scope="col">Nama Kegiatan</th>
@@ -40,12 +41,12 @@
                 <?php } ?>
               </td>
               <td>
-                <?php if ($this->session->userdata('user')->role == 1) { ?>
+                <?php if ($this->session->userdata('role') == 1) { ?>
                   <a href="<?= base_url('detail/komentar/') . $k['id'] ?>">Detail</a>
                 <?php } else { ?>
                   <a href="<?= base_url('detail/LihatDetail/') . $k['id'] ?>">Detail</a>
                 <?php } ?>
-                <a href="<?= base_url('detail/cetak/') . $k['id'] ?>" >cetak</a>
+                <a href="<?= base_url('detail/cetak/') . $k['id'] ?>">cetak</a>
               </td>
             </tr>
           <?php endforeach; ?>

@@ -7,7 +7,7 @@
                     <tr>
                         <td class="col-md-3"><label>Pengaju </label></td>
                         <td class="col-md-9">
-                            <p class="form-control text-break "><?= $kegiatan['nama_pengaju'] ?></p>
+                            <p class="form-control text-break "><?= $user['nama'] ?></p>
                         </td>
                     </tr>
                     <tr>
@@ -147,7 +147,7 @@
                                 </footer>
                             </div>
                         </div>
-                        <br/>
+                        <br />
                     <?php endforeach; ?>
 
                 </div>
