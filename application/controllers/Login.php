@@ -21,15 +21,15 @@ class Login extends CI_Controller
 
     public function cek_login()
     {
-        //Mengambil username dan password
-        $username = $this->input->post('username');
+        //Mengambil email dan password
+        $email = $this->input->post('email');
         $password = $this->input->post('password');
 
 
         //Mengambil data user berdasarkan email untuk menentukan apakah usernya ada 
-        $user = $this->db->get_where('user', ['username' => $username])->row_array();
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
         $data = [
-            'username' => $user['username'],
+            'email' => $user['email'],
             'role' => $user['role'],
             'id' => $user['id']
         ]; //Membuat data untuk Session
@@ -37,7 +37,7 @@ class Login extends CI_Controller
         if ($user) { //Jika ada
             if (password_verify($this->input->post('password'), $user['password'])) { //Mencocokkan password yang di input dengan yang ada di db
                 $data = [
-                    'username' => $user['username'],
+                    'email' => $user['email'],
                     'role' => $user['role'],
                     'id' => $user['id']
                 ]; //Membuat data untuk Session
@@ -47,26 +47,19 @@ class Login extends CI_Controller
             } else { // Jika data salah password
                 echo "<script> alert('password anda salah'); document.location.href = '" . base_url('login') . "';</script>";
             }
-        } else { //Jika Username salah
-            echo "<script> alert('Username tidak ditemukan'); document.location.href = '" . base_url('login') . "';</script>";
+        } else { //Jika email salah
+            echo "<script> alert('email tidak ditemukan'); document.location.href = '" . base_url('login') . "';</script>";
         }
-    }
-
-    function buatSession($id)
-    {
-        $data = $this->User_Model->get_by_id($id);
-        $this->session->set_userdata($data);
-        redirect('kegiatan');
     }
 
     // public function cek_login()
     // {
-    //     $username=$this->input->post("username");
+    //     $email=$this->input->post("email");
     //     $password=$this->input->post("password");
-    //     $cek_login=$this->User_Model->login($username,$password);
+    //     $cek_login=$this->User_Model->login($email,$password);
 
     //         if (empty($cek_login)){
-    //             echo '<script>alert("Username atau Password yang Anda masukan salah.");window.location.href="'.base_url('/index.php/login').'";</script>';
+    //             echo '<script>alert("email atau Password yang Anda masukan salah.");window.location.href="'.base_url('/index.php/login').'";</script>';
     //         }
     //         else{
     //             $this->session->set_userdata('user', $cek_login);
@@ -88,24 +81,24 @@ class Login extends CI_Controller
         $this->load->library('session');
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[15]|is_unique[user.username]');
+        $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[15]|is_unique[user.email]');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {
             $errors = $this->form_validation->error_array();
             $this->session->set_flashdata('errors', $errors);
             $this->session->set_flashdata('input', $this->input->post());
-            redirect('auth/regis');
+            redirect('login/registration');
         } else {
-            $username = $this->input->post('username');
+            $email = $this->input->post('email');
             $nama = $this->input->post('nama');
             $password = $this->input->post('password');
             $pass = password_hash($password, PASSWORD_DEFAULT);
-            $role = $this->input->post('role');
+            $role = 2;
             $data = [
                 'nama' => $nama,
                 'role' => $role,
-                'username' => $username,
+                'email' => $email,
                 'password' => $pass,
             ];
             $insert = $this->User_Model->register("user", $data);
