@@ -94,7 +94,7 @@ class Detail extends CI_Controller
 		// print_r($user);die;
 		if($this->session->userdata('role') == 1)
 		{
-			$where = 'satgas';
+			$where = ['satgas' => $this->session->userdata('email')];
 		}else if($this->session->userdata('role') == 5)
 		{
 			$where = ['satgas'=>$this->session->userdata('email'), 'kasatgas'=>$this->session->userdata('email'),];
