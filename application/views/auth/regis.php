@@ -10,7 +10,7 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                     </div>
-                    <form class="user" method="post" action="<?php echo base_url('/login/proses_register'); ?>">
+                    <form class="user" method="post" action="<?php echo base_url('login/proses_register'); ?>">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="username" placeholder="Username">
                         </div>

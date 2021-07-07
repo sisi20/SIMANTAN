@@ -41,12 +41,12 @@
                 <?php } ?>
               </td>
               <td>
-                <?php if ($this->session->userdata('role') == 1) { ?>
-                  <a href="<?= base_url('detail/komentar/') . $k['id'] ?>">Detail</a>
-                <?php } else { ?>
-                  <a href="<?= base_url('detail/LihatDetail/') . $k['id'] ?>">Detail</a>
+                <?php if ($user['role'] == '1' || $user['id'] == $k['pengaju']) { ?>
+                  <a href="<?= base_url('detail/komentar/') . $k['id'] ?>" class="linkdetail">Detail</a>
+                  <?php if ($k['status'] == '1') { ?>
+                    | <a href="<?= '#'//base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail">Cetak</a>
+                  <?php } ?>
                 <?php } ?>
-                <a href="<?= base_url('detail/cetak/') . $k['id'] ?>">cetak</a>
               </td>
             </tr>
           <?php endforeach; ?>

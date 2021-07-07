@@ -52,6 +52,13 @@ class Login extends CI_Controller
         }
     }
 
+    function buatSession($id)
+    {
+        $data = $this->User_Model->get_by_id($id);
+        $this->session->set_userdata($data);
+        redirect('kegiatan');
+    }
+
     // public function cek_login()
     // {
     //     $username=$this->input->post("username");

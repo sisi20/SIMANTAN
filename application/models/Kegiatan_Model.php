@@ -12,9 +12,6 @@ class Kegiatan_model extends CI_Model
 
     public function get()
     {
-        //$this->db->from($this->table);
-        //$query = $this->db->get();
-        //return $query->result_array();
         $this->db->select('k.*,u.nama as nama');
         $this->db->from('kegiatan k');
         $this->db->join('user u','k.penanggung_jawab=u.id');   
@@ -32,7 +29,6 @@ class Kegiatan_model extends CI_Model
 
     public function get_by_id($kegiatan)
     {
-        //SELECT k.*, u.nama FROM komentar k, user u WHERE k.user = u.id AND k.kegiatan = 1
         $this->db->select('k.*, u.nama as user, b.nama as nama_pengaju');
         $this->db->from('kegiatan k');
         $this->db->join('user u', 'u.id = k.penanggung_jawab');
