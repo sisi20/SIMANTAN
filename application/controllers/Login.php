@@ -7,18 +7,10 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->cek_sesi();
         $this->load->model('User_Model');
         $this->load->library('form_validation');
         $this->load->library('session');
 		$this->load->library('googlefunction');
-    }
-
-    function cek_sesi()
-    {
-        if($this->session->userdata('email') != null){
-            redirect('kegiatan');
-        };
     }
 
     public function index()
