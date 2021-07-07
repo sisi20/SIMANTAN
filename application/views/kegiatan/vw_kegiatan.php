@@ -15,9 +15,6 @@
       <div class="col-md-6">
         <p>List Kegiatan</p>
       </div><br>
-      <div class="col-md-6">
-        <p><small><?= $user->nama; ?></small> | <a href="<?= base_url('login/logout'); ?>"><small style="color: red;">Logout</small></a></p>
-      </div><br>
       <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-info">Tambah Kegiatan</a></div><br>
       <table class="table is-narrow" id="tabeluser">
         <thead>

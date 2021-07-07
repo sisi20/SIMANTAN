@@ -13,11 +13,8 @@ class Kegiatan extends CI_Controller
 
 	function index()
 	{
-		$data['user'] = $this->User_model->get_by_id('2');
-		// print_r($data['user']->nama); die;
-		// $data['user'] = $this->session->userdata('user'); 
+		$data['user'] = $this->session->userdata('user');
 		$data['kegiatan'] = $this->Kegiatan_model->get();
-		$data['judul'] = "Halaman List";
 		$this->load->view("layout/header", $data);
 		$this->load->view("kegiatan/vw_kegiatan", $data);
 		$this->load->view("layout/footer", $data);
@@ -108,6 +105,7 @@ class Kegiatan extends CI_Controller
 			// print_r($data); die;
 		}
 	}
+
 	public function cetak()
 	{
 		$mpdf = new \Mpdf\Mpdf();
