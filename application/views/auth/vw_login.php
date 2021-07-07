@@ -22,8 +22,8 @@
                                     <form class="user" method="post" action="login/cek_login">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp" name="username"
-                                                placeholder="Username...">
+                                                id="exampleInputEmail" aria-describedby="emailHelp" name="email"
+                                                placeholder="E-mail...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password"
