@@ -45,9 +45,9 @@ class User_Model extends CI_Model
         $this->db->delete($this->tabel, array('id' => $id));
     }
 
-    public function login($username, $password){
+    public function login($email, $password){
         return $this->db->query("select * from user
-        Where username='".$username."' AND password='".$password."'")->row();
+        Where email='".$email."' AND password='".$password."'")->row();
     }
 
     public function register($table, $data)
