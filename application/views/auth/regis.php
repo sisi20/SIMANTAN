@@ -13,7 +13,7 @@
                                 </div>
                     <form class="user" method="post" action="<?php echo base_url('login/proses_register'); ?>">
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="email">
+                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="nama" placeholder="Name Lengkap">
