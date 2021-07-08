@@ -1,4 +1,4 @@
-<body class="bg-gradient-primary">
+<body >
 
     <div class="container">
 
@@ -15,7 +15,10 @@
                             <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="email">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="nama" placeholder="Name Institut">
+                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="nama" placeholder="Name Lengkap">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="institut" placeholder="Name Institut">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control form-control-user" id="exampleInputEmail" name="password" placeholder="Password">
