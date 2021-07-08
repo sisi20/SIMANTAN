@@ -88,7 +88,7 @@ class Login extends CI_Controller
             $errors = $this->form_validation->error_array();
             $this->session->set_flashdata('errors', $errors);
             $this->session->set_flashdata('input', $this->input->post());
-            redirect('login/registration');
+           echo '<script>alert("Percobaan Gagal!!");window.location.href="' . base_url('/index.php/login/registration') . '";</script>';
         } else {
             $email = $this->input->post('email');
             $nama = $this->input->post('nama');
