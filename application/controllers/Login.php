@@ -10,52 +10,14 @@ class Login extends CI_Controller
         $this->load->model('User_Model');
         $this->load->library('form_validation');
         $this->load->library('session');
-		$this->load->library('googlefunction');
     }
 
     public function index()
     {
-		$data = array('loginUrl' => $this->googlefunction->getLoginUrl());
-		$this->session->set_userdata('loginUrl', $data['loginUrl']);
         $this->load->view('template/header');
-        $this->load->view('auth/vw_login', $data);
+        $this->load->view('auth/vw_login');
         $this->load->view('template/footer');
     }
-
-	public function oauth()
-	{
-		//cek code yang dikirim dari google
-        $code = $this->input->get('code', TRUE);
-        $login = $this->googlefunction->login($code);
-        if ($login) {
-            //cek apakah email yang login terdaftar di database pegawai
-            $user = $this->googlefunction->getUserInfo();
-            $parameter = [
-                'id' => $user->email,
-                'ws_user' => '9G637Ruk86y'
-            ];
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://pegawai.pcr.ac.id/services/get_pegawai');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $parameter);
-            $tmp = json_decode(curl_exec($ch));
-            curl_close($ch);
-            $resp =  $tmp && $tmp->status == true ? $tmp->data : FALSE;
-
-            if ($resp) {
-                //apabila pegawai ditemukan, simpan session
-                $this->session->set_userdata('nama', $resp->nama);
-                $this->session->set_userdata('email', $resp->email);
-				// TODO: ambil role untuk email $resp->email lalu simpan di session
-                redirect(base_url('kegiatan'));
-            } else {
-                //apabila pegawai tidak ditemukan, redirect ke halaman login
-                $this->session->set_flashdata('flash_message', 'Anda tidak termasuk dalam pengguna sistem ini');
-                redirect(base_url('login'));
-            }
-        }
-	}
 
     public function cek_login()
     {
@@ -130,12 +92,14 @@ class Login extends CI_Controller
         } else {
             $email = $this->input->post('email');
             $nama = $this->input->post('nama');
+            $institut = $this->input->post('institut');
             $password = $this->input->post('password');
             $pass = password_hash($password, PASSWORD_DEFAULT);
             $role = 2;
             $data = [
                 'nama' => $nama,
                 'role' => $role,
+                'institut' => $institut,
                 'email' => $email,
                 'password' => $pass,
             ];
