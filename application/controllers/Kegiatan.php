@@ -113,7 +113,7 @@ class Kegiatan extends CI_Controller
 		}
 	}
 
-	function edit($id)
+	function edit($id = "")
 	{
 		// $data['judul'] = "Halaman Tambah Mahasiswa";
 		// $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
