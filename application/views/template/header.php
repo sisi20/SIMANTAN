@@ -20,4 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>assets1/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+   body {
+    background-color: #258F6D;
+   }
+ </style>
 </head>
