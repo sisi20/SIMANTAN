@@ -44,4 +44,10 @@ class Kegiatan_model extends CI_Model
     {
         $this->db->update($this->table, $where, array('id' => $id));
     }
+
+    public function update($where, $data)
+    {
+        // print_r($data);die;
+        $this->db->update($this->table, $data, $where);
+    }
 }

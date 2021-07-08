@@ -35,24 +35,38 @@
               <td><?= $k['penanggung_jawab'] ?></td>
               <td><?= $k['waktu'] ?></td>
               <td>
-                <?php if ($k['satgas'] == "Menunggu") { ?>
+                <?php if ($k['satgas'] == "Dibatalkan") { ?>
+                  <p class="btn btn-danger">Dibatalkan</p>
+                <?php } else if ($k['satgas'] == "Menunggu") { ?>
                   <p class="btn btn-warning">Menunggu</p>
                 <?php } else { ?>
-                  <p class="btn btn-success"><?= $k['satgas']?></p>
+                  <p class="btn btn-success"><?= $k['satgas'] ?></p>
                 <?php } ?>
               </td>
               <td>
-              <?php if ($k['kasatgas'] == "Menunggu") { ?>
+                <?php if ($k['kasatgas'] == "Dibatalkan") { ?>
+                  <p class="btn btn-danger">Dibatalkan</p>
+                <?php } else if ($k['kasatgas'] == "Menunggu") { ?>
                   <p class="btn btn-warning">Menunggu</p>
                 <?php } else { ?>
-                  <p class="btn btn-success"><?= $k['kasatgas']?></p>
+                  <p class="btn btn-success"><?= $k['kasatgas'] ?></p>
                 <?php } ?>
               </td>
               <td>
-                <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $k['pengaju']) || ($this->session->userdata('email') == $k['penanggung_jawab'])) { ?>
-                  <a href="<?= base_url('detail/komentar/') . $k['id'] ?>" class="linkdetail">Detail</a>
+                <?php if (($k['satgas'] == "Dibatalkan")) { ?>
+
+                <?php } else if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $k['pengaju']) || ($this->session->userdata('email') == $k['penanggung_jawab'])) { ?>
+                  <?php if ($this->session->userdata('email') == $k['pengaju']) { ?>
+                    <?php if ($k['kasatgas'] == "Menunggu") { ?>
+                      <a href="<?= base_url('kegiatan/edit/') . $k['id'] ?>" class="linkdetail"><i class="fas fa-edit"></i></a>
+                      <br />
+                      <a href="<?= base_url('kegiatan/batal/') . $k['id'] ?>" class="linkdetail" onclick="return confirm('Batalkan Kegiatan?')"><i class="fas fa-trash-alt"></i></a>
+                      <br />
+                    <?php } ?>
+                  <?php } ?>
+                  <a href="<?= base_url('detail/komentar/') . $k['id'] ?>" class="linkdetail "><i class="fas fa-info-circle"></i></a>
                   <?php if ($k['satgas'] != 'Menunggu' && $k['kasatgas'] != 'Menunggu') { ?>
-                    | <a href="<?= base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail">Cetak</a>
+                    <a href="<?= base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail "><i class="fas fa-print"></i></a>
                   <?php } ?>
                 <?php } ?>
               </td>

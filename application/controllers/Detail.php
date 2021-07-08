@@ -47,7 +47,7 @@ class Detail extends CI_Controller
 		$this->load->view("layout/footer", $data);
 	}
 
-	public function komentar($kegiatan)
+	public function komentar($kegiatan = "")
 	{
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
