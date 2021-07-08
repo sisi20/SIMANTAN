@@ -126,6 +126,11 @@ class Kegiatan extends CI_Controller
 			echo "<script>alert('Data Kegiatan tidak ditemukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
 
+		if ($data['kegiatan']['satgas'] == "Dibatalkan")
+		{
+			echo "<script>alert('Kegiatan ini telah dibatalkan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
+		}
+
 		if ($this->session->userdata('email') == $data['kegiatan']['pengaju']) {
 		} else {
 			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
@@ -213,15 +218,18 @@ class Kegiatan extends CI_Controller
 		}
 	}
 
-	public function batal($id)
+	public function batal($id = "")
 	{
 		$data = $this->Kegiatan_model->get_by_id($id);
-
+		if(empty($data)){
+			echo "<script>alert('Data Kegiatan tidak ditemukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
+		}
 		if ($this->session->userdata('email') == $data['pengaju']) {
 			$data = ['satgas' => 'Dibatalkan', 'kasatgas' => 'Dibatalkan'];
 		} else {
-			echo "<script> alert('UnAuthorized'); document.location.href = '" . base_url() . "';</script>";
+			echo "<script>alert('Anda tidak bisa membatalkan yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
+		// print_r('test'); die;
 		$this->Kegiatan_model->gantiStatus($id, $data);
 		redirect('kegiatan/');
 	}
