@@ -19,5 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>assets1/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <style>
+        body.bg-body{
+            background-image: url('<?=base_url('assets1/bg/kertas.png')?>');
+        }
+    </style>
 </head>

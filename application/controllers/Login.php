@@ -10,21 +10,21 @@ class Login extends CI_Controller
         $this->load->model('User_Model');
         $this->load->library('form_validation');
         $this->load->library('session');
-		$this->load->library('googlefunction');
+        $this->load->library('googlefunction');
     }
 
     public function index()
     {
-		$data = array('loginUrl' => $this->googlefunction->getLoginUrl());
-		$this->session->set_userdata('loginUrl', $data['loginUrl']);
+        $data = array('loginUrl' => $this->googlefunction->getLoginUrl());
+        $this->session->set_userdata('loginUrl', $data['loginUrl']);
         $this->load->view('template/header');
         $this->load->view('auth/vw_login', $data);
         $this->load->view('template/footer');
     }
 
-	public function oauth()
-	{
-		//cek code yang dikirim dari google
+    public function oauth()
+    {
+        //cek code yang dikirim dari google
         $code = $this->input->get('code', TRUE);
         $login = $this->googlefunction->login($code);
         if ($login) {
@@ -47,7 +47,7 @@ class Login extends CI_Controller
                 //apabila pegawai ditemukan, simpan session
                 $this->session->set_userdata('nama', $resp->nama);
                 $this->session->set_userdata('email', $resp->email);
-				// TODO: ambil role untuk email $resp->email lalu simpan di session
+                // TODO: ambil role untuk email $resp->email lalu simpan di session
                 redirect(base_url('kegiatan'));
             } else {
                 //apabila pegawai tidak ditemukan, redirect ke halaman login
@@ -55,7 +55,7 @@ class Login extends CI_Controller
                 redirect(base_url('login'));
             }
         }
-	}
+    }
 
     public function cek_login()
     {
@@ -77,7 +77,7 @@ class Login extends CI_Controller
                 $data = [
                     'email' => $user['email'],
                     'role' => $user['role'],
-                    'id' => $user['id'], 
+                    'id' => $user['id'],
                     'nama' => $user['nama']
                 ]; //Membuat data untuk Session
 
@@ -114,45 +114,85 @@ class Login extends CI_Controller
     //         }
     // }
 
-    public function proses_register()
+    // public function proses_register()
+    // {
+    //     $this->load->library('form_validation');
+    //     $this->load->library('session');
+
+    //     $this->form_validation->set_rules('nama', 'Nama', 'required');
+    //     $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[50]|is_unique[user.email]');
+    //     $this->form_validation->set_rules('password', 'Password', 'required|trim');
+    //     $this->form_validation->set_rules('insitutIn', 'Institut', 'required');
+
+
+    //     if ($this->form_validation->run() == FALSE) {
+    //     } else {
+    //         $email = $this->input->post('email');
+    //         $nama = $this->input->post('nama');
+    //         $institut = $this->input->post('institut');
+    //         $password = $this->input->post('password');
+    //         $pass = password_hash($password, PASSWORD_DEFAULT);
+    //         $role = 2;
+    //         $data = [
+    //             'nama' => $nama,
+    //             'role' => $role,
+    //             'institut' => $institut,
+    //             'email' => $email,
+    //             'password' => $pass,
+    //         ];
+    //         $insert = $this->User_Model->register("user", $data);
+    //         if ($insert) {
+    //             echo '<script>alert("Sukses! Anda berhasil melakukan register. Silahkan login untuk mengakses data.");window.location.href="' . base_url('/index.php/login') . '";</script>';
+    //         }
+    //     }
+    // }
+
+    public function registration()
     {
         $this->load->library('form_validation');
         $this->load->library('session');
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[50]|is_unique[user.email]');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required', 
+                array('required' => 'Nama Wajib Di Isi'));
+        $this->form_validation->set_rules('email', 'email', 'required|min_length[5]|max_length[50]|is_unique[user.email]', 
+                array('required' => 'email Wajib Di Isi', 'is_unique' => 'Email Sudah terdaftar'));
+        $this->form_validation->set_rules('password', 'Password', 'required|trim', 
+                array('required' => 'Password Wajib Di Isi'));
+        $this->form_validation->set_rules('institutIn', 'Institut', 'required',
+                array('required' => 'Institut Wajib Di Isi'));
+
 
         if ($this->form_validation->run() == FALSE) {
-            $errors = $this->form_validation->error_array();
-            $this->session->set_flashdata('errors', $errors);
-            $this->session->set_flashdata('input', $this->input->post());
-            redirect('login/registration');
+            $this->load->view('template/header');
+            $this->load->view('auth/regis');
+            $this->load->view('template/footer');
         } else {
             $email = $this->input->post('email');
             $nama = $this->input->post('nama');
+            $cek_institut = $this->input->post('institutIn');
+            if($cek_institut == "Politeknik Caltex Riau")
+            {   
+                $institut = $cek_institut;
+                $role = 3;
+            }else{
+                $institut = $this->input->post('institutOut');
+                $role = 4;
+            }
             $password = $this->input->post('password');
             $pass = password_hash($password, PASSWORD_DEFAULT);
-            $role = 2;
             $data = [
                 'nama' => $nama,
                 'role' => $role,
+                'institut' => $institut,
                 'email' => $email,
                 'password' => $pass,
             ];
+            // print_r($data); die;
             $insert = $this->User_Model->register("user", $data);
             if ($insert) {
                 echo '<script>alert("Sukses! Anda berhasil melakukan register. Silahkan login untuk mengakses data.");window.location.href="' . base_url('/index.php/login') . '";</script>';
             }
         }
-    }
-
-    public function registration()
-    {
-
-        $this->load->view('template/header');
-        $this->load->view('auth/regis');
-        $this->load->view('template/footer');
     }
 
     public function logout()

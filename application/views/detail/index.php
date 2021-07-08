@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <h3>Kegiatan</h3>
             <form action="" method="POST">
                 <table>
@@ -127,11 +127,11 @@
                 </table>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5">
 
             <h3>Status Pengajuan Kegiatan</h3>
             <hr />
-            <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $kegiatan['pengaju'] && !empty($komentar))) { ?>
+            <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $kegiatan['pengaju'] && !empty($komentar)) || ($this->session->userdata('email') == $kegiatan['penanggung_jawab']) ) { ?>
                 <div class="overflow-auto" style="min-height: 20px; max-height: 46em;">
                     <?php foreach ($komentar as $k) : ?>
                         <!--  Mengambil data komentar -->
@@ -158,7 +158,7 @@
                 </div>
                 <div class="" style="margin-top: 25px; margin-bottom: 50px;">
                     <hr />
-                    <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || (!empty($komentar))) { ?>
+                    <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || (!empty($komentar)) || ($this->session->userdata('email') == $kegiatan['penanggung_jawab'])) { ?>
                         <?php if (($kegiatan['satgas'] != "Menunggu") && ($kegiatan['kasatgas'] != "Menunggu")) { //Jika sudah di approve keduanya
                         ?>
 

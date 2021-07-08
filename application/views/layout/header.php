@@ -28,7 +28,8 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header fonts">
-        <h3 class="fonts">SiManTan-PCR</h3>
+        <!-- <h3 class="fonts">SiManTan-PCR</h3> -->
+        <img src="<?= base_url('assets1/img/SiM@nTan-PCR.png') ?>" class="img-fluid">
         <img src="<?= base_url('assets1/img/Politeknik_Caltex_Riau.png') ?>" class="img-fluid">
       </div>
 
@@ -87,7 +88,7 @@
     <div id="content">
 
       <div class="row" style="margin-top: 10px;">
-        <div class="col-md-12 font"> <p style="margin-top: 10px; margin-bottom: 10px;"><center>Selamat Datang</center></p> </div>
+        <div class="col-md-12 fonts"> <p style="margin-top: 10px; margin-bottom: 10px;"><center><h3 class="fonts" style="color: #5cb85c;">Selamat Datang</h3></center></p> </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">

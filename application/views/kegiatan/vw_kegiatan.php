@@ -13,7 +13,7 @@
   <section class="">
     <div class="container">
       <div class="col-md-6">
-        <p>List Kegiatan</p>
+        <h3 class="fonts">List Kegiatan</h3>
       </div><br>
       <div class="col-md-6"><a href="<?= base_url(); ?>kegiatan/tambah" class="btn btn-success">Tambah Kegiatan</a></div><br>
 
@@ -49,7 +49,7 @@
                 <?php } ?>
               </td>
               <td>
-                <?php if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 5 || $this->session->userdata('email') == $k['pengaju']) { ?>
+                <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $k['pengaju']) || ($this->session->userdata('email') == $k['penanggung_jawab'])) { ?>
                   <a href="<?= base_url('detail/komentar/') . $k['id'] ?>" class="linkdetail">Detail</a>
                   <?php if ($k['satgas'] != 'Menunggu' && $k['kasatgas'] != 'Menunggu') { ?>
                     | <a href="<?= base_url('detail/cetak/') . $k['id'] ?>" class="linkdetail">Cetak</a>

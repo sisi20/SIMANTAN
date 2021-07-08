@@ -47,7 +47,7 @@ class Detail extends CI_Controller
 		$this->load->view("layout/footer", $data);
 	}
 
-	public function komentar($kegiatan = '1')
+	public function komentar($kegiatan)
 	{
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
@@ -58,7 +58,7 @@ class Detail extends CI_Controller
 		// print_r($data['komentar']); die;
 		
 		// print_r($data['user']['role']); die;
-		if(($this->session->userdata('role') ==1) || ($this->session->userdata('role') ==5) || ($this->session->userdata('email')==$data['kegiatan']['pengaju'])){
+		if(($this->session->userdata('role') ==1) || ($this->session->userdata('role') ==5) || ($this->session->userdata('email')==$data['kegiatan']['pengaju']) || ($this->session->userdata('email')==$data['kegiatan']['penanggung_jawab'])){
 			
 		}else{
 			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
