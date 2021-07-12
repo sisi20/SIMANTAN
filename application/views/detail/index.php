@@ -158,7 +158,7 @@
                 </div>
                 <div class="" style="margin-top: 25px; margin-bottom: 50px;">
                     <hr />
-                    <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || (!empty($komentar)) || ($this->session->userdata('email') == $kegiatan['penanggung_jawab'])) { ?>
+                    <?php if (($this->session->userdata('role') == '1') || ($this->session->userdata('role') == '5') || (!empty($komentar))){ ?>
                         <?php if (($kegiatan['satgas'] != "Menunggu") && ($kegiatan['kasatgas'] != "Menunggu")) { //Jika sudah di approve keduanya
                         ?>
 
@@ -179,9 +179,9 @@
                             <?= form_error('komentar', '<small class="text-danger pl-3">', '</small>') ?>
                             <br />
                             <?php if (($this->session->userdata('role') == "1") || ($this->session->userdata('role') == "5")) { ?>
-                                <a href="<?= base_url('detail/approve/' . $kegiatan['id']) ?>" class="btn btn-success form-control" <?php if ($this->session->userdata('role') == '1' && $kegiatan['satgas'] != "Menunggu") {
+                                <a href="<?= base_url('detail/approve/' . $kegiatan['id']) ?>" class="btn btn-success form-control" <?php if ($this->session->userdata('role') == '1' && $kegiatan['satgas'] != "Menunggu" && $kegiatan['penanggung_jawab'] != $this->session->userdata('email') && $kegiatan['pengaju'] != $this->session->userdata('email')) {
                                                                                                                                         echo "hidden";
-                                                                                                                                    } else if ($this->session->userdata('role') == '5' && $kegiatan['kasatgas'] != "Menunggu") {
+                                                                                                                                    } else if ($this->session->userdata('role') == '5' && $kegiatan['kasatgas'] != "Menunggu" && $kegiatan['penanggung_jawab'] != $this->session->userdata('email') && $kegiatan['pengaju'] != $this->session->userdata('email')) {
                                                                                                                                         echo "hidden";
                                                                                                                                     }
                                                                                                                                     ?> onclick="return confirm('Approve Kegiatan?')">Approve</a>

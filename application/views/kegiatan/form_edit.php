@@ -93,7 +93,7 @@
 					<select name="penanggung_jawab" value="<?= set_value('penanggung_jawab'); ?>" class="form-control">
 						<!-- <option value="">Pilih Penanggung Jawab</option> -->
 						<?php foreach ($listUser as $u) : ?>
-							<option value="<?= $u['email']; ?>" <?php if($kegiatan['penanggung_jawab'] == $u['email']){echo 'selected';}?>><?= $u['nama']; ?></option>
+							<option value="<?= $u->email; ?>" <?php if($kegiatan['penanggung_jawab'] == $u->email){echo 'selected';}?>><?= $u->nama.$u->gelar_depan; ?></option>
 						<?php endforeach; ?>
 					</select>
 

@@ -22,6 +22,12 @@ class Login extends CI_Controller
         $this->load->view('template/footer');
     }
 
+    function cek_emails($email)
+	{
+		$cek = $this->User_model->cek_email($email);
+		return $cek;
+	}
+
     public function oauth()
     {
         //cek code yang dikirim dari google
@@ -44,10 +50,26 @@ class Login extends CI_Controller
             $resp =  $tmp && $tmp->status == true ? $tmp->data : FALSE;
 
             if ($resp) {
-                //apabila pegawai ditemukan, simpan session
-                $this->session->set_userdata('nama', $resp->nama);
-                $this->session->set_userdata('email', $resp->email);
+                //apabila pegawai ditemukan, cek email simpan session 
+                
+                // $this->session->set_userdata('nama', $resp->nama);
+                // $this->session->set_userdata('email', $resp->email);
                 // TODO: ambil role untuk email $resp->email lalu simpan di session
+                $cek = $this->User_model->cek_email($resp->email);
+                if($cek){
+                    $data = [
+                        'email' => $resp->email,
+                        'role' => $cek['role']
+                    ];
+                }else{
+                    $data = [
+                        'email' => $resp->email,
+                        'role' => '2'
+                    ];
+                }
+                
+                $this->session->set_userdata($data);
+                
                 redirect(base_url('kegiatan'));
             } else {
                 //apabila pegawai tidak ditemukan, redirect ke halaman login
@@ -63,6 +85,7 @@ class Login extends CI_Controller
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
+        
 
         //Mengambil data user berdasarkan email untuk menentukan apakah usernya ada 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
@@ -73,6 +96,10 @@ class Login extends CI_Controller
         ]; //Membuat data untuk Session
 
         if ($user) { //Jika ada
+            if($user['role'] == '1' || $user['role'] == '5' )
+            {
+                echo "<script> alert('Jangan ByPass'); document.location.href = '" . base_url('login') . "';</script>";
+            }else 
             if (password_verify($this->input->post('password'), $user['password'])) { //Mencocokkan password yang di input dengan yang ada di db
                 $data = [
                     'email' => $user['email'],

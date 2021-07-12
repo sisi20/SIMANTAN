@@ -95,7 +95,7 @@
 					<select name="penanggung_jawab" value="<?= set_value('penanggung_jawab'); ?>" class="form-control">
 						<option value="">Pilih Penanggung Jawab</option>
 						<?php foreach ($listUser as $u) : ?>
-							<option value="<?= $u['email']; ?>"><?= $u['nama']; ?></option>
+							<option value="<?= $u->email; ?>"><?= $u->gelar_depan.$u->nama.$u->gelar_akademik; ?></option>
 						<?php endforeach; ?>
 					</select>
 
