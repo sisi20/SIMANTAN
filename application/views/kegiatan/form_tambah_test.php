@@ -110,8 +110,8 @@
 			</tr>
 			<tr>
 				<td><label>Awal Acara</label></td>
-				<td><input type="datetime-local" name="acara_awal" value="<?= set_value('acara_awal'); ?>" class="form-control"> </td>
-				<td><?= form_error('acara_awal', '<small class="text-danger pl-3">', '</small>'); ?></td>
+				<td><input type="datetime-local" name="acara_mulai" value="<?= set_value('acara_mulai'); ?>" class="form-control"> </td>
+				<td><?= form_error('acara_mulai', '<small class="text-danger pl-3">', '</small>'); ?></td>
 			</tr>
 			<tr>
 				<td><label>Akhir Acara</label></td>

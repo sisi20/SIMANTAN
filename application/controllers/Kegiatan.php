@@ -53,7 +53,7 @@ class Kegiatan extends CI_Controller
 		$this->form_validation->set_rules('prioritas', 'Prioritas', 'required', array('required' => 'Prioritas Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('prioritas_alasan', 'Alasan Prioritas', 'required', array('required' => 'Alasan Prioritas Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('penanggung_jawab', 'Penanggung Jawab', 'required', array('required' => 'Penanggung Jawab Kegiatan Wajib Di Isi'));
-		$this->form_validation->set_rules('acara_awal', 'acara_awal', 'required', array('required' => 'Awal Acara Kegiatan Wajib Di Isi'));
+		$this->form_validation->set_rules('acara_mulai', 'acara_mulai', 'required', array('required' => 'Awal Acara Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('acara_akhir', 'acara_akhir', 'required', array('required' => 'Akhir Acara Kegiatan Wajib Di Isi'));
 		//$this->form_validation->set_rules('tempat', 'Tempat', 'required', array('required' => 'Tempat Kegiatan Wajib Di Isi'));
 
@@ -82,7 +82,7 @@ class Kegiatan extends CI_Controller
 				'prioritas' => $this->input->post('prioritas'),
 				'prioritas_alasan' => $this->input->post('prioritas_alasan'),
 				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
-				'acara_mulai' => $this->input->post('acara_awal'),
+				'acara_mulai' => $this->input->post('acara_mulai'),
 				'acara_akhir' => $this->input->post('acara_akhir'),
 				'pelaksana' => $this->input->post('pelaksana'),
 				'skema_proses_masuk_keluar' => $skema_proses_masuk_keluar,
@@ -174,11 +174,7 @@ class Kegiatan extends CI_Controller
 		}
 
 		$data['judul'] = "Halaman Edit Kegiatan";
-		if ($this->input->post('lokasiIn') == NULL) {
-			$this->form_validation->set_rules('lokasiOut', 'Lokasi Out', 'required', array('required' => 'Lokasi Kegiatan Wajib Di Isi'));
-		} else {
-			$this->form_validation->set_rules('lokasiIn', 'Lokasi In', 'required', array('required' => 'Lokasi Kegiatan Wajib Di Isi'));
-		}
+		
 		$this->form_validation->set_rules('kegiatan', 'Nama Kegiatan', 'required', array('required' => 'Nama Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('kegiatan_unit', 'Nama Unit Pengaju Kegiatan', 'required', array('required' => 'Nama Unit Pengaju Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('kegiatan_peserta', 'Darimana Peserta Kegiatan', 'required', array('required' => 'Darimana Peserta Kegiatan Wajib Di Isi'));
@@ -188,8 +184,7 @@ class Kegiatan extends CI_Controller
 		$this->form_validation->set_rules('penanggung_jawab', 'Penanggung Jawab', 'required', array('required' => 'Penanggung Jawab Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('acara_mulai', 'acara mulai', 'required', array('required' => 'acara mulai Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('acara_akhir', 'acara Akhir', 'required', array('required' => 'acara Akhir Kegiatan Wajib Di Isi'));
-		$this->form_validation->set_rules('tempat', 'Tempat', 'required', array('required' => 'Tempat Kegiatan Wajib Di Isi'));
-
+		
 		// $this->form_validation->set_rules('pelaksana', 'Pelaksana', 'required|numeric', array('required' => 'No HP Mahasiswa Wajib Di Isi', 'numeric' => 'No HP Harus Angka'));
 		$this->form_validation->set_rules('pelaksana', 'Pelaksana', 'required', array('required' => 'Pelaksana Kegiatan Wajib Di Isi'));
 		$this->form_validation->set_rules('skema_proses_masuk_keluar', 'Skema Proses Peserta Masuk Dan Keluar Kampus', 'required', array('required' => 'Skema Proses Peserta Masuk Dan Keluar Kampus Wajib Di Isi'));
@@ -202,17 +197,16 @@ class Kegiatan extends CI_Controller
 			$this->load->view("kegiatan/form_edit_test", $data);
 			$this->load->view("layout/footer");
 		} else {
+			$lokasiIn = $this->input->post('lokasiIn');
+			$lokasiOut = $this->input->post('lokasiOut');
+			
 			$lokasi = "";
 			$tempat = $this->input->post('tempat');
 			$skema_proses_masuk_keluar = $_POST['skema_proses_masuk_keluar'];
 			$skema_penerapan_prokes = $_POST['skema_penerapan_prokes'];
 			$skema_kegiatan_berlangsung = $_POST['skema_kegiatan_berlangsung'];
 			$skema_kegiatan_selesai = $_POST['skema_kegiatan_selesai'];
-			if ($this->input->post('lokasiIn') == NULL) {
-				$lokasi = $this->input->post('lokasiOut');
-			} else {
-				$lokasi = $this->input->post('lokasiIn');
-			}
+			
 			$data = [
 				'kegiatan' => $this->input->post('kegiatan'),
 				'kegiatan_unit' => $this->input->post('kegiatan_unit'),
@@ -221,38 +215,64 @@ class Kegiatan extends CI_Controller
 				'prioritas' => $this->input->post('prioritas'),
 				'prioritas_alasan' => $this->input->post('prioritas_alasan'),
 				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
-				'waktu' => $this->input->post('waktu'),
-				'tempat' => $tempat,
-				'lokasi' => $lokasi,
+				'acara_mulai' => $this->input->post('acara_mulai'),
+				'acara_akhir' => $this->input->post('acara_akhir'),
 				'pelaksana' => $this->input->post('pelaksana'),
 				'skema_proses_masuk_keluar' => $skema_proses_masuk_keluar,
 				'skema_penerapan_prokes' => $skema_penerapan_prokes,
 				'skema_kegiatan_berlangsung' => $skema_kegiatan_berlangsung,
 				'skema_kegiatan_selesai' => $skema_kegiatan_selesai,
-				// 'skema_proses_masuk_keluar' => $this->input->post('skema_proses_masuk_keluar'),
-				// 'skema_penerapan_prokes' => $this->input->post('skema_penerapan_prokes'),
-				// 'skema_kegiatan_berlangsung' => $this->input->post('skema_kegiatan_berlangsung'),
-				// 'skema_kegiatan_selesai' => $this->input->post('skema_kegiatan_selesai'),
 				'satgas' => $this->input->post('satgas'),
 				'kasatgas' => $this->input->post('kasatgas'),
-				'pengaju' => $this->input->post('pengaju'),
-
+				'pengaju' => $this->input->post('pengaju')
 			];
 			$id = $this->input->post('id');
-			// print_r($data);die;
+			//Mengupdate DB Kegiatan
 			$this->Kegiatan_model->update(['id' => $id], $data);
-			// $id = $this->Kegiatan_model->insert($data);
-			// $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Kegiatan Berhasil Ditambah!</div>');
-			redirect('detail/komentar/' . $id);
 
-			// $data['user'] = $this->User_model->get_by_id('1'); //ambil dari session
-			// $data['nama_user'] = $this->User_model->get(); 
-			// $data['komentar'] = $this->Komentar_model->get_by_id($id); //ambil dari parameter 
-			// $data['kegiatan'] = $this->Kegiatan_model->get_by_id($id); //disini parameter id kegiatan untuk mengambil datanya
-			// $this->load->view('layout/header');
-			// $this->load->view('detail/index', $data);
-			// $this->load->view('layout/footer');
-			// print_r($data); die;
+			//Mengupdate pada lokasi
+			foreach($lokasiIn as $key =>$t){
+				if($t == NULL){
+					#Kosongkan
+				}else
+				if($this->Lokasi_model->cek_data($key)>0)
+				{
+					$data = ['tempat'=>'Indoor', 'lokasi'=>$t];
+					$this->Lokasi_model->update($data, $key);
+					print_r($data);
+				}else{
+					$data = [
+						'id_kegiatan' =>$id,
+						'tempat'=> 'Indoor',
+						'lokasi'=>$t 
+					];
+					$this->Lokasi_model->insert($data);
+					print_r($data);
+				}
+			}
+
+			foreach($lokasiOut as $key =>$t){
+				if($t == NULL){
+					#Kosongkan
+				}else
+				if($this->Lokasi_model->cek_data($key)>0)
+				{
+					$data = ['tempat'=>'Outdoor', 'lokasi'=>$t];
+					$this->Lokasi_model->update($data, $key);
+					print_r($data);
+				}else{
+					$data = [
+						'id_kegiatan' =>$id,
+						'tempat'=> 'Outdoor',
+						'lokasi'=>$t 
+					];
+					$this->Lokasi_model->insert($data);
+					print_r($data);
+				}
+			}
+
+
+			redirect('detail/komentar/' . $id);
 		}
 	}
 

@@ -22,12 +22,6 @@ class Login extends CI_Controller
         $this->load->view('template/footer');
     }
 
-    function cek_emails($email)
-	{
-		$cek = $this->User_model->cek_email($email);
-		return $cek;
-	}
-
     public function oauth()
     {
         //cek code yang dikirim dari google
