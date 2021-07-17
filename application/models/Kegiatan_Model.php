@@ -16,7 +16,7 @@ class Kegiatan_model extends CI_Model
         $this->db->select('k.*');
         $this->db->from('kegiatan k');
         // $this->db->join('user u','k.penanggung_jawab=u.id');
-        $this->db->order_by('waktu desc');
+        $this->db->order_by('acara_mulai desc');
         // $this->db->from($this->table);
         $query = $this->db->get();
         return $query->result_array();

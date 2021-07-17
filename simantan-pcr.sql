@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 08:43 AM
+-- Generation Time: Jul 17, 2021 at 09:24 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -37,9 +37,8 @@ CREATE TABLE `kegiatan` (
   `prioritas` varchar(50) NOT NULL,
   `prioritas_alasan` varchar(100) NOT NULL,
   `penanggung_jawab` varchar(255) NOT NULL,
-  `waktu` datetime NOT NULL,
-  `tempat` varchar(100) NOT NULL,
-  `lokasi` varchar(50) NOT NULL,
+  `acara_mulai` datetime NOT NULL,
+  `acara_akhir` datetime NOT NULL,
   `pelaksana` varchar(50) NOT NULL,
   `skema_proses_masuk_keluar` text NOT NULL,
   `skema_penerapan_prokes` text NOT NULL,
@@ -53,10 +52,12 @@ CREATE TABLE `kegiatan` (
 -- Dumping data for table `kegiatan`
 --
 
-INSERT INTO `kegiatan` (`id`, `pengaju`, `kegiatan`, `kegiatan_unit`, `kegiatan_peserta`, `kegiatan_jmlpeserta`, `prioritas`, `prioritas_alasan`, `penanggung_jawab`, `waktu`, `tempat`, `lokasi`, `pelaksana`, `skema_proses_masuk_keluar`, `skema_penerapan_prokes`, `skema_kegiatan_berlangsung`, `skema_kegiatan_selesai`, `satgas`, `kasatgas`) VALUES
-(33, 'wahyu19ti@mahasiswa.pcr.ac.id', 'HimaFest', 'BEM', 'PCR', '100', 'Sedang', 'Acara Tahunan', 'staff@pcr.ac.id', '2021-07-31 13:16:00', 'Outdoor', 'Meet', 'BEM', 'Meet online', 'Meet online', 'On cam', 'On cam', 'heriry@pcr.ac.id', 'Menunggu'),
-(34, 'prathama19ti@mahasiswa.pcr.ac.id', 'Workshop Test Simantan', 'HIMA', 'PCR', '100', 'Biasa', 'Webinar online', 'silvana@pcr.ac.id', '2021-07-31 16:05:00', 'Outdoor', 'Meet', 'HIMA', 'Online', 'Online', 'Oncam', 'Oncam', 'nowobudiono@pcr.ac.id', 'nowobudiono@pcr.ac.id'),
-(35, 'rafi@gmail.com', 'Walimahan', 'Ikatan Alumni', 'PCR dan ', '100', 'Sedang', 'Walimahan saya dengan Anggi', 'agus@pcr.ac.id', '2021-07-18 08:00:00', 'Indoor', 'R.Studio Gambar', 'Ikatan Alumni', 'Memasuki Gerbang, Parkir pada depan GSG, memasuki GSG', 'Social distancing dan Masker', 'Social distancing dan Masker', 'Peserta keluar dari GSG, keluar lewat Gerbang utama', 'diah@pcr.ac.id', 'nowobudiono@pcr.ac.id');
+INSERT INTO `kegiatan` (`id`, `pengaju`, `kegiatan`, `kegiatan_unit`, `kegiatan_peserta`, `kegiatan_jmlpeserta`, `prioritas`, `prioritas_alasan`, `penanggung_jawab`, `acara_mulai`, `acara_akhir`, `pelaksana`, `skema_proses_masuk_keluar`, `skema_penerapan_prokes`, `skema_kegiatan_berlangsung`, `skema_kegiatan_selesai`, `satgas`, `kasatgas`) VALUES
+(68, 'wahyu19ti@mahasiswa.pcr.ac.id', 'input banyak', 'aa', 'a', '1', 'Biasa', 'a', 'chitra@pcr.ac.id', '2021-07-17 11:07:00', '2021-07-24 11:07:00', 'a', 'a', 'a', 'a', 'a', 'Menunggu', 'Menunggu'),
+(69, 'wahyu19ti@mahasiswa.pcr.ac.id', 'no indoor', 'a', 'a', '1', 'Biasa', 'a', 'abdi.bhayangkara@pcr.ac.id', '2021-07-23 11:08:00', '2021-07-16 11:08:00', 'a', 'a', 'a', 'a', 'a', 'Menunggu', 'Menunggu'),
+(70, 'wahyu19ti@mahasiswa.pcr.ac.id', 'no OutDoor', 'a', 'a', '1', 'Biasa', 'a', 'abdi.bhayangkara@pcr.ac.id', '2021-07-16 11:08:00', '2021-07-17 11:08:00', 'a', 'a', 'a', 'a', 'a', 'Menunggu', 'Menunggu'),
+(71, 'wahyu19ti@mahasiswa.pcr.ac.id', 'input bolong', 'a', 'a', '1', 'Biasa', 'a', 'abdi.bhayangkara@pcr.ac.id', '2021-07-16 11:09:00', '2021-07-16 11:09:00', 'a', 'a', 'a', 'a', 'a', 'Menunggu', 'Menunggu'),
+(72, 'wahyu19ti@mahasiswa.pcr.ac.id', 'no input (uncheck)', 'a', 'a', '1', 'Biasa', '1', 'abdi.bhayangkara@pcr.ac.id', '2021-07-22 11:11:00', '2021-07-30 11:11:00', 'a', 'a', 'a', 'a', 'a', 'Menunggu', 'Menunggu');
 
 -- --------------------------------------------------------
 
@@ -72,17 +73,41 @@ CREATE TABLE `komentar` (
   `tanggal` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `komentar`
+-- Table structure for table `lokasi`
 --
 
-INSERT INTO `komentar` (`id`, `user`, `kegiatan`, `komentar`, `tanggal`) VALUES
-(48, 'agus@pcr.ac.id', 35, 'wah... semoga Sakinah Mawadah Waromah ya nak', '2021-07-08 01:27:16'),
-(49, 'rafi@gmail.com', 35, 'hehehe Aamiin pak, jangan lupa datang ya pak', '2021-07-08 01:28:02'),
-(50, 'diah@pcr.ac.id', 35, 'Ibuk dak diundang do rafi?', '2021-07-08 01:29:28'),
-(51, 'rafi@gmail.com', 35, 'undangan untuk ibuk sudah saya kirim buk', '2021-07-08 01:29:58'),
-(52, 'diah@pcr.ac.id', 35, 'oh iya, baru di beri oleh kemahasiswaan', '2021-07-08 01:30:49'),
-(53, 'nowobudiono@pcr.ac.id', 35, 'Bapak izinkan', '2021-07-08 01:31:49');
+CREATE TABLE `lokasi` (
+  `id` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL,
+  `tempat` varchar(10) NOT NULL,
+  `lokasi` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lokasi`
+--
+
+INSERT INTO `lokasi` (`id`, `id_kegiatan`, `tempat`, `lokasi`) VALUES
+(83, 68, 'Indoor', 'R.101'),
+(84, 68, 'Indoor', 'R.102'),
+(85, 68, 'Indoor', 'R.103'),
+(86, 68, 'Outdoor', 'GOR'),
+(87, 68, 'Outdoor', 'Main Hall'),
+(88, 68, 'Outdoor', 'Student Center'),
+(89, 68, 'Outdoor', 'Halaman Kampus'),
+(90, 69, 'Outdoor', 'GOR'),
+(91, 69, 'Outdoor', 'Main Hall'),
+(92, 70, 'Indoor', 'R.119'),
+(93, 70, 'Indoor', 'R.120'),
+(94, 70, 'kosong', 'kosong'),
+(95, 71, 'Indoor', 'R.118'),
+(96, 71, 'Indoor', 'R.119'),
+(97, 71, 'Outdoor', 'Main Hall'),
+(98, 71, 'kosong', 'kosong'),
+(99, 72, 'kosong', 'kosong');
 
 -- --------------------------------------------------------
 
@@ -126,7 +151,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `institut`, `role`, `password`, `email`) VALUES
-(6, 'Dosen Staff 1', 'Politeknik Caltex Riau', 2, '$2y$10$KsNTDJTXXllXKKVCyMoa8eechfh22GXx.SNb99ZF6SlePICaCtjIO', 'staff@pcr.ac.id'),
 (12, 'Nowo Budiono,S.Si', 'Politeknik Caltex Riau', 5, '$2y$10$7s7Rms1T3bD8GaRRA.bxC.E5ZSg4CCEyPscilLzey1811ZhB/PgnG', 'nowobudiono@pcr.ac.id'),
 (13, ' Heri Ribut Yuliantoro, SE.,M.Ak.,Akt.,CA', 'Politeknik Caltex Riau', 1, '$2y$10$HjLZh6uvCb5CmqRSXU7O8O3OY/OnsJzns3alHa4ORo8Vl1FpWHFkW', 'heriry@pcr.ac.id'),
 (14, 'Kartina Diah Kusuma W, ST.,MT', 'Politeknik Caltex Riau', 1, '$2y$10$00QWtR1X2dWOySJ9zO2SiuHZjjcaGevmJqPrJatBPB.7QqLjkGu1K', 'diah@pcr.ac.id'),
@@ -138,11 +162,9 @@ INSERT INTO `user` (`id`, `nama`, `institut`, `role`, `password`, `email`) VALUE
 (20, 'Ruli Kusmawati, A.Md', 'Politeknik Caltex Riau', 1, '$2y$10$P501PqkbVgmHmB7xKAPVBuz8a8f9EwedDZ.RGZ6k2i.Yo8Kba31wS', 'ruli@pcr.ac.id'),
 (21, 'Irwan Chandra, A.Md', 'Politeknik Caltex Riau', 1, '$2y$10$jZVMhVbf3EEjyuwolEhMFuEC2C5xNIYLfFATYFdmaR5SsVLCYYdKi', 'iwan@pcr.ac.id'),
 (22, 'Afrianto, A.Md', 'Politeknik Caltex Riau', 1, '$2y$10$4nIL38.HaKXjHiWCzyTsMO/FlVg51htO6R4WoAyIaJfvAefv0Ijry', 'afrianto@pcr.ac.id'),
-(23, 'Muhammad Wahyu Kandrival', 'Politeknik Caltex Riau', 3, '$2y$10$4h8l2Hhq0nY3prXIyqBG7.Gxxf4AvEyBcGSuZTp0C5LVfPCkHHIgm', 'wahyu19ti@mahasiswa.pcr.ac.id'),
-(24, 'Silvana Rasio Henim, S.ST, M.T.', 'Politeknik Caltex Riau', 2, '$2y$10$H0HtE0Wtt0vEUyOTrNfWjugzXSh0cHcYau2ZrMZxzMGSdac0NSLOu', 'silvana@pcr.ac.id'),
-(25, 'Agus Urip Ari Wibowo, S.T.,M.T.', 'Politeknik Caltex Riau', 2, '$2y$10$1SrwTIWwnRcvksh/z2jaTuTv55fhfkv5cxQCXxQ4023kikzIuTnWu', 'agus@pcr.ac.id'),
-(26, 'Prathama Rifqi Syafitrah', 'Politeknik Caltex Riau', 3, '$2y$10$VWNxPpptqaIS9qMyjdd0ae2al1SmzlHkOi1vpy0s5yU5tRYuNZ48q', 'prathama19ti@mahasiswa.pcr.ac.id'),
-(27, 'Rafi Nur Ibrahim', 'Alumni', 4, '$2y$10$oDs19/pFl50v.zNdnvg51ujDe7bar8i/TI.UdGXx1IYoGj7Udq73e', 'rafi@gmail.com');
+(28, 'Muhammad Wahyu Kandrival', 'Politeknik Caltex Riau', 3, '$2y$10$Ao0zqnG3A1EJZFovXYdRz.vIBkT1/yTFDSbNlfLU5peoS/ErqcsOG', 'wahyu19ti@mahasiswa.pcr.ac.id'),
+(29, 'Prathama Rifqi Syafitrah', 'Politeknik Caltex Riau', 3, '$2y$10$gH5RzRA1F.JfnAnlDULCi.3gCHFbqjjGVz43X8pMtfwOmODNXrJu.', 'prathama19ti@mahasiswa.pcr.ac.id'),
+(30, 'Zainal Arifin Renaldo, S.S., M.Hum.', 'Politeknik Caltex Riau', 2, '$2y$10$sYTWyxLt9RnMJY4Q75w1IOWhbL0962J7GOLDkkZzIP3QiedwONE1.', 'zainal@pcr.ac.id');
 
 --
 -- Indexes for dumped tables
@@ -160,6 +182,13 @@ ALTER TABLE `kegiatan`
 ALTER TABLE `komentar`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_komentar_kegiatan` (`kegiatan`);
+
+--
+-- Indexes for table `lokasi`
+--
+ALTER TABLE `lokasi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lokasi_kegiatan` (`id_kegiatan`);
 
 --
 -- Indexes for table `role`
@@ -182,19 +211,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `lokasi`
+--
+ALTER TABLE `lokasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -205,6 +240,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `komentar`
   ADD CONSTRAINT `fk_komentar_kegiatan` FOREIGN KEY (`kegiatan`) REFERENCES `kegiatan` (`id`);
+
+--
+-- Constraints for table `lokasi`
+--
+ALTER TABLE `lokasi`
+  ADD CONSTRAINT `fk_lokasi_kegiatan` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id`);
 
 --
 -- Constraints for table `user`

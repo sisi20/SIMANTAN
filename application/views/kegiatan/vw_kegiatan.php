@@ -22,7 +22,8 @@
           <th scope="col">Nama Kegiatan</th>
           <th scope="col">Prioritas</th>
           <th scope="col">PIC</th>
-          <th scope="col">Waktu</th>
+          <th scope="col">Acara Mulai</th>
+          <th scope="col">Akhir Acara</th>
           <th scope="col">Status Satgas</th>
           <th scope="col">Status KaSatGas</th>
           <th scope="col">Aksi</th>
@@ -33,7 +34,8 @@
               <td><?= $k['kegiatan'] ?></td>
               <td><?= $k['prioritas'] ?></td>
               <td><?= $k['penanggung_jawab'] ?></td>
-              <td><?= $k['waktu'] ?></td>
+              <td><?= $k['acara_mulai'] ?></td>
+              <td><?= $k['acara_akhir'] ?></td>
               <td>
                 <?php if ($k['satgas'] == "Dibatalkan") { ?>
                   <p class="btn btn-danger">Dibatalkan</p>

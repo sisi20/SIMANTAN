@@ -105,8 +105,12 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label>Waktu</label></td>
-				<td><input type="datetime-local" name="waktu" value="<?= $kegiatan['waktu']; ?>" class="form-control"> </td>
+				<td><label>Acara Mulai</label></td>
+				<td><input type="datetime-local" name="acara_mulai" value="<?= $kegiatan['acara_mulai']; ?>" class="form-control"> </td>
+			</tr>
+			<tr>
+				<td><label>Acara Akhir</label></td>
+				<td><input type="datetime-local" name="acara_akhir" value="<?php  $waktu = strtotime($kegiatan['acara_akhir']); echo date('Y-m-d h:i:s', $waktu) ?>" class="form-control"> </td>
 			</tr>
 			<tr>
 				<td>

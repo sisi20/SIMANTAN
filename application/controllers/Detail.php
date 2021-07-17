@@ -1,4 +1,7 @@
 <?php
+
+use phpDocumentor\Reflection\Types\Mixed_;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Detail extends CI_Controller
@@ -27,13 +30,14 @@ class Detail extends CI_Controller
 		$this->load->model('User_Model');
 		$this->load->model('Kegiatan_Model');
 		$this->load->model('Komentar_Model');
+		$this->load->model('Lokasi_Model');
 		date_default_timezone_set("Asia/Jakarta"); //Mengatur Zona waktu Jadi Indonesia
 	}
 
 	function cek_sesi()
 	{
-		if($this->session->userdata('email') == null){
-			echo "<script>alert('Silahkan Login Terlebih Dahulu'); document.location.href = '" . base_url('login')."'</script>";
+		if ($this->session->userdata('email') == null) {
+			echo "<script>alert('Silahkan Login Terlebih Dahulu'); document.location.href = '" . base_url('login') . "'</script>";
 		}
 	}
 
@@ -51,17 +55,17 @@ class Detail extends CI_Controller
 	{
 		$data['komentar'] = $this->Komentar_Model->get_by_id($kegiatan); //ambil dari parameter 
 		$data['kegiatan'] = $this->Kegiatan_Model->get_by_id($kegiatan); //disini parameter id kegiatan untuk mengambil datanya
-		if(empty($data['kegiatan'])){
-			echo "<script>alert('Data Kegiatan tidak ditemukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		$data['lokasi'] = $this->Lokasi_Model->get_by_id($kegiatan);
+		if (empty($data['kegiatan'])) {
+			echo "<script>alert('Data Kegiatan tidak ditemukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
-		$data['judul'] = "Halaman Detail ".$data['kegiatan']['kegiatan'];
+		$data['judul'] = "Halaman Detail " . $data['kegiatan']['kegiatan'];
 		// print_r($data['komentar']); die;
-		
+
 		// print_r($data['user']['role']); die;
-		if(($this->session->userdata('role') ==1) || ($this->session->userdata('role') ==5) || ($this->session->userdata('email')==$data['kegiatan']['pengaju']) || ($this->session->userdata('email')==$data['kegiatan']['penanggung_jawab'])){
-			
-		}else{
-			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan')."'</script>";
+		if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $data['kegiatan']['pengaju']) || ($this->session->userdata('email') == $data['kegiatan']['penanggung_jawab'])) {
+		} else {
+			echo "<script>alert('Tidak dapat mengakses detail yang bukan anda ajukan'); document.location.href = '" . base_url('kegiatan') . "'</script>";
 		}
 		// if($data['kegiatan'][''])
 		$this->form_validation->set_rules('komentar', 'Komentar', 'required', [
@@ -92,22 +96,19 @@ class Detail extends CI_Controller
 	public function approve($id)
 	{
 		$data = $this->Kegiatan_Model->get_by_id($id);
-		
-		if($this->session->userdata('role') == 1)
-		{
+
+		if ($this->session->userdata('role') == 1) {
 			$data = ['satgas' => $this->session->userdata('email')];
-		}else if($this->session->userdata('role') == 5)
-		{
-			if ($data['satgas'] != 'Menunggu'){
-				$data = ['kasatgas'=>$this->session->userdata('email'),];
-			}else{
-				$data = ['satgas'=>$this->session->userdata('email'), 'kasatgas'=>$this->session->userdata('email'),];
+		} else if ($this->session->userdata('role') == 5) {
+			if ($data['satgas'] != 'Menunggu') {
+				$data = ['kasatgas' => $this->session->userdata('email'),];
+			} else {
+				$data = ['satgas' => $this->session->userdata('email'), 'kasatgas' => $this->session->userdata('email'),];
 			}
-			
-		}else{
+		} else {
 			echo "<script> alert('UnAuthorized'); document.location.href = '" . base_url() . "';</script>";
 		}
-		$this->Kegiatan_Model->gantiStatus($id , $data);
+		$this->Kegiatan_Model->gantiStatus($id, $data);
 		redirect('kegiatan/');
 	}
 
@@ -179,29 +180,29 @@ class Detail extends CI_Controller
 		<td colspan="2"><b>PENANGGUNG JAWAB</b></td>
 		<td colspan="3">' . $data['kegiatan']['penanggung_jawab'] . '</td>
 	</tr>');
-	
+
 		$timestamp = strtotime($data['kegiatan']['waktu']);
 		$day = date('l', $timestamp);;
-		if($day == 'Monday'){
+		if ($day == 'Monday') {
 			$day = 'Senin';
-		}else if($day == 'Tuesday'){
+		} else if ($day == 'Tuesday') {
 			$day = 'Selasa';
-		}else if($day == 'Wednesday'){
+		} else if ($day == 'Wednesday') {
 			$day = 'Rabu';
-		}else if($day == 'Thursday'){
+		} else if ($day == 'Thursday') {
 			$day = 'Kamis';
-		}else if($day == 'Friday'){
+		} else if ($day == 'Friday') {
 			$day = 'Jumat';
-		}else if($day == 'Saturday'){
+		} else if ($day == 'Saturday') {
 			$day = 'Sabtu';
-		}else if($day == 'Sunday'){
+		} else if ($day == 'Sunday') {
 			$day = 'Minggu';
 		}
 		$mpdf->WriteHTML('<tr >
 		<td colspan="2"><b>WAKTU / TEMPAT / LOKASI</b></td>
 		<td colspan="3">
 		<p><b>Waktu</b></p>
-		<p>' .$day.' , '. $data['kegiatan']['waktu'] . '</p>
+		<p>' . $day . ' , ' . $data['kegiatan']['waktu'] . '</p>
 		<p><b>Lokasi / Tempat</b></p>
 		<p>' . $data['kegiatan']['tempat'] . '</p>
 		<p>' . $data['kegiatan']['lokasi'] . '</p>
@@ -223,18 +224,18 @@ class Detail extends CI_Controller
 		$mpdf->WriteHTML('<tr colspan="4">
 		<td colspan="2"><b>CATATAN SATGAS</b></td>
 		<td colspan="3">');
-		foreach($data['komentar'] as $k) : 
-			$mpdf->WriteHTML('<p><b>'.$k['user'].'</b> : '.$k['komentar'].'</p>'); 
-		endforeach; 
+		foreach ($data['komentar'] as $k) :
+			$mpdf->WriteHTML('<p><b>' . $k['user'] . '</b> : ' . $k['komentar'] . '</p>');
+		endforeach;
 		$mpdf->WriteHTML('
 		</td>
 		</tr>');
 		$mpdf->WriteHTML('<tr colspan="4">
 		<td colspan="3"><p><b>PENGUSUL</b></p> <br>' .  $data['kegiatan']['pengaju'] . '</td>
-		<td colspan="1"><p><b>SATGAS COVID</b></p> <br>'.$data['kegiatan']['satgas'].'</td>
-		<td colspan="1"><p><b>KETUA SATGAS COVID</b></p> <br>'.$data['kegiatan']['kasatgas'].'</td>
+		<td colspan="1"><p><b>SATGAS COVID</b></p> <br>' . $data['kegiatan']['satgas'] . '</td>
+		<td colspan="1"><p><b>KETUA SATGAS COVID</b></p> <br>' . $data['kegiatan']['kasatgas'] . '</td>
 	</tr>');
 		$mpdf->WriteHTML('</table>');
-		$mpdf->Output(''.$data['kegiatan']['kegiatan'].'.pdf', 'D');
+		$mpdf->Output('' . $data['kegiatan']['kegiatan'] . '.pdf', 'D');
 	}
 }

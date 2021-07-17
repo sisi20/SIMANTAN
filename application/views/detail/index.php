@@ -59,25 +59,73 @@
                     </tr>
 
                     <tr>
-                        <td class="col-md-3"><label>Waktu / Tempat</label></td>
+                        <td class="col-md-3"><label>Mulai Acara</label></td>
                         <td class="col-md-9">
-                            <p class="form-control text-break"><?= $kegiatan['waktu'] ?></p>
+                            <p class="form-control text-break"><?= $kegiatan['acara_mulai'] ?></p>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="col-md-3"><label>Lokasi : </label></td>
+                        <td class="col-md-3"><label>Acara Akhir</label></td>
                         <td class="col-md-9">
-                            <p class="form-control text-break"><?= $kegiatan['tempat'] ?></p>
+                            <p class="form-control text-break"><?= $kegiatan['acara_akhir'] ?></p>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="col-md-3"><label></label></td>
+                        <td class="col-md-3"><label>Lokasi Indoor </label></td>
                         <td class="col-md-9">
-                            <p class="form-control text-break"><?= $kegiatan['lokasi'] ?></p>
+                            <?php 
+                            if ($lokasi[0]['tempat'] == 'Indoor') {
+                                $awal = $lokasi[0]['id'];
+                                $next = 1;
+                                echo '<p class="form-control text-break">' . $lokasi['0']['lokasi'] . '</p>';
+                            } else {
+                                $next = 0;
+                                $awal = 0;
+                                echo '<p class="form-control text-break">-</p>';
+                            } ?>
+
                         </td>
                     </tr>
+                    <?php foreach ($lokasi as $l) : ?>
+                        <?php if ($l['tempat'] == 'Indoor' && $l['id'] != $awal) {
+                            echo '<tr>
+                            <td class="col-md-3"><label></label></td>
+                            <td class="col-md-9"><p class="form-control text-break">' . $l['lokasi'] . '</p></td>
+                            </tr>';
+                            $next++;
+                        } ?>
+
+                    <?php endforeach; ?>
+
+                    <tr>
+                        <td class="col-md-3"><label>Lokasi Outdoor </label></td>
+                        <td class="col-md-9">
+                            <?php 
+                            if ($lokasi[0]['tempat'] == 'Outdoor') {
+                                $awal = $lokasi[0]['id'];
+                                echo '<p class="form-control text-break">' . $lokasi['0']['lokasi'] . '</p>';
+                            } else if($lokasi[$next]['tempat'] == 'Outdoor'){
+                                $awal = $lokasi[$next]['id'];
+                                echo '<p class="form-control text-break">'.$lokasi[$next]['lokasi'].'</p>';
+                                $next++;
+                            }else{
+                                $awal = 0;
+                                echo '<p class="form-control text-break">-</p>';
+                            } ?>
+
+                        </td>
+                    </tr>
+                    <?php foreach ($lokasi as $l) : ?>
+                        <?php if ($l['tempat'] == 'Outdoor' && $l['id'] != $awal) {
+                            echo '<tr>
+                            <td class="col-md-3"><label></label></td>
+                            <td class="col-md-9"><p class="form-control text-break">' . $l['lokasi'] . '</p></td>
+                            </tr>';
+                        } ?>
+
+                    <?php endforeach; ?>
 
                     <tr>
                         <td class="col-md-3"><label>Pelaksana</label></td>
@@ -131,7 +179,7 @@
 
             <h3>Status Pengajuan Kegiatan</h3>
             <hr />
-            <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $kegiatan['pengaju'] && !empty($komentar)) || ($this->session->userdata('email') == $kegiatan['penanggung_jawab']) ) { ?>
+            <?php if (($this->session->userdata('role') == 1) || ($this->session->userdata('role') == 5) || ($this->session->userdata('email') == $kegiatan['pengaju'] && !empty($komentar)) || ($this->session->userdata('email') == $kegiatan['penanggung_jawab'])) { ?>
                 <div class="overflow-auto" style="min-height: 20px; max-height: 46em;">
                     <?php foreach ($komentar as $k) : ?>
                         <!--  Mengambil data komentar -->
@@ -158,7 +206,7 @@
                 </div>
                 <div class="" style="margin-top: 25px; margin-bottom: 50px;">
                     <hr />
-                    <?php if (($this->session->userdata('role') == '1') || ($this->session->userdata('role') == '5') || (!empty($komentar))){ ?>
+                    <?php if (($this->session->userdata('role') == '1') || ($this->session->userdata('role') == '5') || (!empty($komentar))) { ?>
                         <?php if (($kegiatan['satgas'] != "Menunggu") && ($kegiatan['kasatgas'] != "Menunggu")) { //Jika sudah di approve keduanya
                         ?>
 
